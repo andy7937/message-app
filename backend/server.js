@@ -5,6 +5,7 @@ const dotenv = require('dotenv');
 dotenv.config();
 
 const app = express();
+// listen for http requests on port 5000
 const PORT = process.env.PORT || 5000;
 const MONGO_URI = process.env.MONGO_URI;
 
@@ -12,12 +13,7 @@ const MONGO_URI = process.env.MONGO_URI;
 app.use(express.json());
 
 // MongoDB Connection
-mongoose.connect(MONGO_URI, {
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
-  useCreateIndex: true,
-  useFindAndModify: false
-})
+mongoose.connect(MONGO_URI) 
   .then(() => console.log('MongoDB connected'))
   .catch(err => console.log(err));
 
