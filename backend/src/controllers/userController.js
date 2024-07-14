@@ -6,10 +6,16 @@ exports.registerUser = async (req, res) => {
   const { username, email, password, phonenum } = req.body;
 
   try {
-    // Check if the user already exists
-    const existingUser = await User.findOne({ email });
-    if (existingUser) {
-      return res.status(400).json({ error: 'User already exists' });
+    // Check if the email is used
+    const existingEmail = await User.findOne({ email });
+    if (existingEmail) {
+      return res.status(400).json({ error: 'Email already used' });
+    }
+
+    // Check if the username is used
+    const existingUsername = await User.findOne({ username });
+    if (existingUsername) {
+      return res.status(401).json({ error: 'Username already used' });
     }
 
     // Hash the password
@@ -26,6 +32,7 @@ exports.registerUser = async (req, res) => {
     // Save the user to the database
     await newUser.save();
     res.status(201).json({ message: 'User registered successfully' });
+
   } catch (error) {
     res.status(500).json({ error: 'Server error' });
   }

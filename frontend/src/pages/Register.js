@@ -10,12 +10,12 @@ function Register() {
   const [confirmPassword, setConfirmPassword] = useState('');
   const [email, setEmail] = useState('');
   const [phonenum, setPhonenum] = useState('');
-  const [error, setError] = useState('');
+  const [output, setOutput] = useState('');
 
   const handleSubmit = (e) => {
     e.preventDefault();
     if (password !== confirmPassword) {
-      setError('Passwords do not match');
+      setOutput('Passwords do not match');
     } else {
       // Handle registration logic here 
       // Send data to the backend
@@ -27,11 +27,15 @@ function Register() {
       })
       .then(response => {
         console.log(response.data);
-        setError('');
+        setOutput(response.data.message);
       })
       .catch(error => {
+        if (error.response && error.response.data && error.response.data.error) {
+          setOutput(error.response.data.error);
+        }
         console.error('There was an error registering!', error);
       });
+
     }
   };
 
@@ -95,8 +99,8 @@ function Register() {
           />
         </div>
         {/* Error field to show if submit did not work*/}
-        {error && <p className="error">{error}</p>}
         <button type="submit">Register</button>
+        {output && <p className="output">{output}</p>}
       </form>
     </div>
   );

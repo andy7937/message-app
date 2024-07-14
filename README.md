@@ -63,6 +63,8 @@ FriendID user1 user2 status(pending, approved, blocked) createdAt updatedAt
 Chats table
 ChatID senderID receiverID message(string of text) timestamp
 
+# Checking console logs
+press f12 on the app open in order to see errors that are occuring between the data tranmissions
 
 # NPM updating
 npm outdated
