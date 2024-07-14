@@ -37,3 +37,24 @@ exports.registerUser = async (req, res) => {
     res.status(500).json({ error: 'Server error' });
   }
 };
+
+// logging in user confirmation
+exports.loginUser = async (req, res) => {
+  const { username, password } = req.body;
+
+  try {
+    // Check if the username is used
+    const existingUsername = await User.findOne({ username });
+    if (!existingUsername) {
+      return res.status(401).json({ error: 'Username incorrect' });
+    }
+
+    // Hash the password
+    const hashedPassword = await bcrypt.hash(password, 10);
+
+    res.status(201).json({ message: 'User Login Successful' });
+
+  } catch (error) {
+    res.status(500).json({ error: 'Server error' });
+  }
+};

@@ -1,9 +1,8 @@
 # Project Context
-Project started to gain an understanding of how to use React, Node and MongoDB  
+Project started to gain an understanding of how to use React, Node and MongoDB and ultimately how to incorporate each framework with each other  
 
 
 # How to run the app
-to run  
 go into backend folder in terminal - start node server.js  
 go into frontend folder in terminal - npm start  
 
@@ -21,7 +20,7 @@ Send user Data (with hashed password) to mongo DB
 
 Login  
 Compare login with existing user data  
-decryp password and see if its the same  
+decrypt password and see if its the same  
 if correct go to dashboard  
 
 Dashboard  
@@ -58,7 +57,6 @@ axios.post 'http://localhost:5000/api/users/register' this line of code will sen
 app.use('/api/users', userRoutes); The Express server routes the incoming request to the appropriate route handler. In this case, it directs requests to /api/users to userRoutes.js  
 router.post('/register', userController.registerUser); The router receives the request and matches it to the /register route. It then calls the registerUser method from the userController to handle the request.  
 in the registerUser class, it will process the data (saving the user using the User schema), and then send a response back to the resgister.js saying the process either succeeded or failed  
-
 
 
 # Database Structure
