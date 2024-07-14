@@ -3,4 +3,4 @@
 # .gitignore
 
 # Ignore .env file
-.env
+src/.env
