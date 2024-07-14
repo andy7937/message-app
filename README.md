@@ -39,16 +39,27 @@ retrieve all chats with the person
 Voice chat
 Group chats
 image sending
+email verification when registering
 
 
-# Structure of Code
+# End to End/full-stack workflow
 The user interacts with the front end react application running on localhost:3000
 
 When the react frontend needs data or needs to save data, it makes HTTP requests to the backend node server running on localhost:5000
 The backend (Node.js with Express) will listen for incoming requests on localhost:5000 
-route handlers like app.get and app.post define how it should respond to different types of requests
+route handlers which use post and get will pick up these calls and send it to the correct controller class.
 
 The backend receives a request that involves data storage or retrieval, it interacts with MongoDB using Mongoose
+
+From there, the controller will process the data, get any data needed, and then send any data back to the frontend
+
+
+Example using the input system in the registration form:
+Inputs are made on the registraion.js in the frontend react
+axios.post 'http://localhost:5000/api/users/register' this line of code will send the info to the backend server at the specified URL
+app.use('/api/users', userRoutes); The Express server routes the incoming request to the appropriate route handler. In this case, it directs requests to /api/users to userRoutes.js
+router.post('/register', userController.registerUser); The router receives the request and matches it to the /register route. It then calls the registerUser method from the userController to handle the request.
+in the registerUser class, it will process the data (saving the user using the User schema), and then send a response back to the resgister.js saying the process either succeeded or failed
 
 
 

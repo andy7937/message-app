@@ -32,7 +32,7 @@ function Register() {
       .catch(error => {
         if (error.response && error.response.data && error.response.data.error) {
           setOutput(error.response.data.error);
-        }
+        } 
         console.error('There was an error registering!', error);
       });
 
