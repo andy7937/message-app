@@ -1,28 +1,25 @@
+// server.js
 const express = require('express');
+const cors = require('cors');
 const mongoose = require('mongoose');
-const dotenv = require('dotenv');
-
-dotenv.config();
+const bodyParser = require('body-parser');
+const userRoutes = require('./src/routes/userRoutes');
 
 const app = express();
-// listen for http requests on port 5000
-const PORT = process.env.PORT || 5000;
-const MONGO_URI = process.env.MONGO_URI;
+const port = process.env.PORT || 5000;
 
 // Middleware
-app.use(express.json());
+app.use(bodyParser.json());
+app.use(cors()); // Enable CORS for all origins
 
-// MongoDB Connection
-mongoose.connect(MONGO_URI) 
-  .then(() => console.log('MongoDB connected'))
-  .catch(err => console.log(err));
+// Routes
+app.use('/api/users', userRoutes);
 
-// Sample route
-app.get('/', (req, res) => {
-  res.send('API is running...');
-});
+// Database connection
+mongoose.connect('mongodb://localhost:27017/ChatStream')
+.then(() => console.log('MongoDB connected'))
+.catch(err => console.log(err));
 
-// Start Server
-app.listen(PORT, () => {
-  console.log(`Server running on port ${PORT}`);
+app.listen(port, () => {
+  console.log(`Server running on http://localhost:${port}`);
 });

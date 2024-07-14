@@ -15,10 +15,10 @@ function App() {
       <Router>
         <Navbar />
           <Routes>
-            <Route exact path="/home" element={Home} />
-            <Route path="/login" element={Login} />
-            <Route path="/register" element={Register} />
-            <Route path="/aboutus" element={Aboutus} />
+            <Route exact path="/home" element={<Home />} />
+            <Route path="/login" element={<Login />} />
+            <Route path="/register" element={<Register />} />
+            <Route path="/aboutus" element={<Aboutus />} />
           </Routes>
       </Router>
 
