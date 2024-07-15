@@ -16,27 +16,46 @@ function Register() {
     e.preventDefault();
     if (password !== confirmPassword) {
       setOutput('Passwords do not match');
-    } else {
-      // Handle registration logic here 
-      // Send data to the backend
-      axios.post('http://localhost:5000/api/users/register', {
-        username,
-        password,
-        email,
-        phonenum,
-      })
-      .then(response => {
-        console.log(response.data);
-        setOutput(response.data.message);
-      })
-      .catch(error => {
-        if (error.response && error.response.data && error.response.data.error) {
+      return;
+    } 
+
+    if (!username || !password || !email || !phonenum) {
+      setOutput('Please fill out all fields');
+      return;
+    }
+    
+    // Handle registration logic here 
+    // Send data to the backend
+    axios.post('http://localhost:5000/api/users/register', {
+      username,
+      password,
+      email,
+      phonenum,
+    })
+    .then(response => {
+      console.log(response.data);
+      setOutput(response.data.message);
+    })
+    .catch(error => {
+      if (error.response) {
+        // Backend returned an error response
+        if (error.response.data && error.response.data.error) {
           setOutput(error.response.data.error);
         } 
-        console.error('There was an error registering!', error);
-      });
 
-    }
+      } 
+      else if (error.request) {
+        // No response from backend
+        setOutput('No response from server. Please check your connection.');
+      } 
+
+      else {
+        // Unexpected error
+        setOutput('An error occurred. Please try again.');
+      }
+      
+      console.error('There was an error registering!', error);
+    });
   };
 
   return (
