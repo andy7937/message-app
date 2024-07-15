@@ -43,17 +43,19 @@ exports.loginUser = async (req, res) => {
   const { username, password } = req.body;
 
   try {
-    // Check if the username is used
-    const existingUsername = await User.findOne({ username });
-    if (!existingUsername) {
+    // Check if the username exists
+    const user = await User.findOne({ username });
+    if (!user) {
       return res.status(401).json({ error: 'Username incorrect' });
     }
 
-    // Hash the password
-    const hashedPassword = await bcrypt.hash(password, 10);
+    // Compare passwords
+    const isMatch = await bcrypt.compare(password, user.password);
+    if (!isMatch) {
+      return res.status(402).json({ error: 'Password incorrect' });
+    }
 
-    res.status(201).json({ message: 'User Login Successful' });
-
+    res.status(200).json({ message: 'User Login Successful' });
   } catch (error) {
     res.status(500).json({ error: 'Server error' });
   }

@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import '../App.css';
+import { Navigate } from 'react-router-dom';
 
 // username password email phonenum 
 
@@ -8,6 +9,7 @@ function Login() {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [output, setOutput] = useState('');
+  const [navigate, setNavigate] = useState(false);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -20,6 +22,8 @@ function Login() {
     .then(response => {
       console.log(response.data);
       setOutput(response.data.message);
+      setNavigate(true);
+
     })
     .catch(error => {
       if (error.response && error.response.data && error.response.data.error) {
@@ -28,6 +32,11 @@ function Login() {
       console.error('There was an error logging in!', error);
     });
   };
+
+    // Perform navigation when redirect state is true
+    if (navigate) {
+      return <Navigate to="/dashboard" />;
+    }
 
   return (
     <div className="login-container">
