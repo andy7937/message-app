@@ -15,15 +15,16 @@ function Login() {
     e.preventDefault();
     // Handle login logic here 
     // Send data to the backend
-    axios.post('http://localhost:5000/api/users/login', {
+    axios.post('http://localhost:5001/api/users/login', {
       username,
       password
     })
     .then(response => {
       console.log(response.data);
       setOutput(response.data.message);
+      localStorage.setItem('username', username);
       setNavigate(true);
-
+      
     })
     .catch(error => {
       if (error.response) {

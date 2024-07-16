@@ -26,7 +26,7 @@ function Register() {
     
     // Handle registration logic here 
     // Send data to the backend
-    axios.post('http://localhost:5000/api/users/register', {
+    axios.post('http://localhost:5001/api/users/register', {
       username,
       password,
       email,
