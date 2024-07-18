@@ -1,6 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import '../App.css';
+import FriendRequestTab from '../components/FriendRequestTab'; 
+import FriendTab from '../components/FriendTab'; 
+
 
 // username password email phonenum 
 
@@ -8,12 +11,15 @@ function Dashboard() {
   const [friendusername, setFriendUsername] = useState('');
   const [output, setOutput] = useState('');
   const [pendingRequests, setPendingRequests] = useState([]);
+  const [friends, setFriends] = useState([]);
+
 
   useEffect(() => {
     const username = localStorage.getItem('username');
     axios.get(`http://localhost:5001/api/users/${username}`)
       .then(response => {
         setPendingRequests(response.data.friendsPending);
+        setFriends(response.data.friends);
       })
       .catch(error => {
         console.error('Error fetching user data', error);
@@ -54,34 +60,6 @@ function Dashboard() {
     });
   };
 
-  const handleAccept = (friendUsername) => {
-    axios.post('http://localhost:5001/api/dashboard/acceptfriendrequest', {
-      usernameFri: friendUsername,
-      usernameCur: localStorage.getItem('username')
-    })
-    .then(response => {
-      setOutput(response.data.message);
-      setPendingRequests(pendingRequests.filter(username => username !== friendUsername));
-    })
-    .catch(error => {
-      console.error('Error accepting friend request', error);
-    });
-  };
-
-  const handleDecline = (friendUsername) => {
-    axios.post('http://localhost:5001/api/dashboard/declinefriendrequest', {
-      usernameFri: friendUsername,
-      usernameCur: localStorage.getItem('username')
-    })
-    .then(response => {
-      setOutput(response.data.message);
-      setPendingRequests(pendingRequests.filter(username => username !== friendUsername));
-    })
-    .catch(error => {
-      console.error('Error declining friend request', error);
-    });
-  };
-
   return (
     <div className="dashboard-container">
       <h2>Dashboard</h2>
@@ -102,16 +80,11 @@ function Dashboard() {
         {output && <p className="output">{output}</p>} 
       </form>
 
-      <h3>Pending Friend Requests</h3>
-      <ul>
-        {pendingRequests.map((username, index) => (
-          <li key={index}>
-            {username}
-            <button onClick={() => handleAccept(username)}>Accept</button>
-            <button onClick={() => handleDecline(username)}>Decline</button>
-          </li>
-        ))}
-      </ul>
+       
+      <FriendRequestTab pendingRequests={pendingRequests} setPendingRequests={setPendingRequests} />
+
+      <FriendTab friends={friends} />
+
 
 
     </div>
