@@ -4,6 +4,7 @@ const cors = require('cors');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const userRoutes = require('./src/routes/userRoutes');
+const dashboardRoutes = require('./src/routes/dashboardRoutes'); // Import dashboardRoutes
 
 const app = express();
 const port = process.env.PORT || 5001;
@@ -14,6 +15,8 @@ app.use(cors()); // Enable CORS for all origins
 
 // Routes
 app.use('/api/users', userRoutes);
+app.use('/api/dashboard', dashboardRoutes);
+
 
 // Database connection
 mongoose.connect('mongodb://localhost:27017/ChatStream')

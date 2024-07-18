@@ -12,7 +12,7 @@ function Dashboard() {
     e.preventDefault();
     // Handle login logic here 
     // Send current users username and friend username to the backend
-    axios.post('http://localhost:5001/api/users/friendrequest', {
+    axios.post('http://localhost:5001/api/dashboard/friendrequest', {
       usernameFri: friendusername,
       usernameCur: localStorage.getItem('username')
     })
@@ -48,7 +48,7 @@ function Dashboard() {
       <form onSubmit={handleSubmit}>
 
         <div className="form-group">
-          <label htmlFor="friendusername">Friend Username</label>
+          <label htmlFor="friendusername">Please write Username of Friend to send Friend request</label>
           <input
             type="text"
             id="friendusername"
