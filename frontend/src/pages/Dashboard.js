@@ -13,8 +13,8 @@ function Dashboard() {
     // Handle login logic here 
     // Send current users username and friend username to the backend
     axios.post('http://localhost:5001/api/users/friendrequest', {
-      currentUsername: localStorage.getItem('username'),
-      friendUsername: friendusername
+      usernameFri: friendusername,
+      usernameCur: localStorage.getItem('username')
     })
     .then(response => {
       console.log(response.data);

@@ -2,11 +2,11 @@
 const mongoose = require('mongoose');
 
 const userSchema = new mongoose.Schema({
-userID: {
+  userID: {
     type: mongoose.Schema.Types.ObjectId,
     required: true,
     auto: true,
-    },
+  },
   username: {
     type: String,
     required: true,
@@ -24,7 +24,11 @@ userID: {
   phonenum: {
     type: String,
     required: true
-  }
+  },
+  // array of friends with their userID
+  friends: [{
+    type: String, 
+  }]
 });
 
 const User = mongoose.model('User', userSchema);
