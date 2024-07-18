@@ -25,10 +25,15 @@ const userSchema = new mongoose.Schema({
     type: String,
     required: true
   },
-  // array of friends with their userID
+  // array of friends with their username
   friends: [{
     type: String, 
+  }],
+  // array of pending friend requests with their username
+  friendsPending: [{
+    type: String, 
   }]
+  
 });
 
 const User = mongoose.model('User', userSchema);

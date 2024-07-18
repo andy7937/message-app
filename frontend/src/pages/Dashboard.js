@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import '../App.css';
 
@@ -7,6 +7,18 @@ import '../App.css';
 function Dashboard() {
   const [friendusername, setFriendUsername] = useState('');
   const [output, setOutput] = useState('');
+  const [pendingRequests, setPendingRequests] = useState([]);
+
+  useEffect(() => {
+    const username = localStorage.getItem('username');
+    axios.get(`http://localhost:5001/api/users/${username}`)
+      .then(response => {
+        setPendingRequests(response.data.friendsPending);
+      })
+      .catch(error => {
+        console.error('Error fetching user data', error);
+      });
+  }, []);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -45,10 +57,10 @@ function Dashboard() {
   return (
     <div className="dashboard-container">
       <h2>Dashboard</h2>
-      <form onSubmit={handleSubmit}>
 
+      <form onSubmit={handleSubmit}>
         <div className="form-group">
-          <label htmlFor="friendusername">Please write Username of Friend to send Friend request</label>
+          <label htmlFor="friendusername">Friends Username</label>
           <input
             type="text"
             id="friendusername"
@@ -58,9 +70,18 @@ function Dashboard() {
           />
         </div>
         {/* Error field to show if submit did not work*/}
-        <button type="submit">Login</button>
+        <button type="submit">Add Friend</button>
         {output && <p className="output">{output}</p>}
       </form>
+
+      <h3>Pending Friend Requests</h3>
+      <ul>
+        {pendingRequests.map((username, index) => (
+          <li key={index}>{username}</li>
+        ))}
+      </ul>
+
+
     </div>
   );
 }

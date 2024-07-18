@@ -4,7 +4,7 @@ const router = express.Router();
 const dashboardController = require('../controllers/dashboardController');
 
 router.post('/friendrequest', dashboardController.friendRequest);
-router.post('/friendrequest', dashboardController.pendingRequest);
+router.post('/acceptrequest', dashboardController.acceptFriendRequest);
 
 
 
