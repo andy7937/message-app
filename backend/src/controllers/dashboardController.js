@@ -38,7 +38,6 @@ exports.friendRequest = async (req, res) => {
   }
 };
 
-  // TODO: 
   exports.acceptFriendRequest = async (req, res) => {
     const { usernameCur, usernameFri } = req.body;
   
@@ -47,6 +46,11 @@ exports.friendRequest = async (req, res) => {
       const currentUser = await User.findOne({ username: usernameCur });
       if (!currentUser) {
         return res.status(401).json({ error: 'Current user not found' });
+      }
+
+      const friendUser = await User.findOne({ username : usernameFri });
+      if (!friendUser) {
+        return res.status(401).json({ error: 'Friend user not found' });
       }
   
       // Check if they are already friends

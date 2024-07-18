@@ -54,6 +54,34 @@ function Dashboard() {
     });
   };
 
+  const handleAccept = (friendUsername) => {
+    axios.post('http://localhost:5001/api/dashboard/acceptfriendrequest', {
+      usernameFri: friendUsername,
+      usernameCur: localStorage.getItem('username')
+    })
+    .then(response => {
+      setOutput(response.data.message);
+      setPendingRequests(pendingRequests.filter(username => username !== friendUsername));
+    })
+    .catch(error => {
+      console.error('Error accepting friend request', error);
+    });
+  };
+
+  const handleDecline = (friendUsername) => {
+    axios.post('http://localhost:5001/api/dashboard/declinefriendrequest', {
+      usernameFri: friendUsername,
+      usernameCur: localStorage.getItem('username')
+    })
+    .then(response => {
+      setOutput(response.data.message);
+      setPendingRequests(pendingRequests.filter(username => username !== friendUsername));
+    })
+    .catch(error => {
+      console.error('Error declining friend request', error);
+    });
+  };
+
   return (
     <div className="dashboard-container">
       <h2>Dashboard</h2>
@@ -71,13 +99,17 @@ function Dashboard() {
         </div>
         {/* Error field to show if submit did not work*/}
         <button type="submit">Add Friend</button>
-        {output && <p className="output">{output}</p>}
+        {output && <p className="output">{output}</p>} 
       </form>
 
       <h3>Pending Friend Requests</h3>
       <ul>
         {pendingRequests.map((username, index) => (
-          <li key={index}>{username}</li>
+          <li key={index}>
+            {username}
+            <button onClick={() => handleAccept(username)}>Accept</button>
+            <button onClick={() => handleDecline(username)}>Decline</button>
+          </li>
         ))}
       </ul>
 
