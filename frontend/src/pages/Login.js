@@ -1,10 +1,9 @@
+// src/components/Login.js
 import React, { useState, useContext } from 'react';
 import axios from 'axios';
-import '../App.css';
 import { Navigate } from 'react-router-dom';
 import { AuthContext } from '../components/AuthContext';
-
-// username password email phonenum 
+import { Container, TextField, Button, Typography, Box, Alert } from '@mui/material';
 
 function Login() {
   const [username, setUsername] = useState('');
@@ -28,7 +27,6 @@ function Login() {
       setOutput(response.data.message);
       localStorage.setItem('username', username);
       setNavigate(true);
-      
     })
     .catch(error => {
       setToken(null);
@@ -38,58 +36,74 @@ function Login() {
         if (error.response.data && error.response.data.error) {
           setOutput(error.response.data.error);
         } 
-
       } 
       else if (error.request) {
         // No response from backend
         setOutput('No response from server. Please check your connection.');
       } 
-
       else {
         // Unexpected error
         setOutput('An error occurred. Please try again.');
       }
-      
       console.error('There was an error logging in!', error);
     });
   };
 
-    // Perform navigation when redirect state is true
-    if (navigate) {
-      return <Navigate to="/dashboard" />;
-    }
+  // Perform navigation when redirect state is true
+  if (navigate) {
+    return <Navigate to="/dashboard" />;
+  }
 
   return (
-    <div className="login-container">
-      <h2>Login</h2>
-      <form onSubmit={handleSubmit}>
-
-        <div className="form-group">
-          <label htmlFor="username">Username</label>
-          <input
-            type="text"
+    <Container maxWidth="xs">
+      <Box
+        sx={{
+          marginTop: 8,
+          display: 'flex',
+          flexDirection: 'column',
+          alignItems: 'center',
+        }}
+      >
+        <Typography component="h1" variant="h5">
+          Login
+        </Typography>
+        <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
+          <TextField
+            margin="normal"
+            required
+            fullWidth
             id="username"
+            label="Username"
+            name="username"
+            autoComplete="username"
+            autoFocus
             value={username}
             onChange={(e) => setUsername(e.target.value)}
-            required
           />
-        </div>
-
-        <div className="form-group">
-          <label htmlFor="password">Password</label>
-          <input
+          <TextField
+            margin="normal"
+            required
+            fullWidth
+            name="password"
+            label="Password"
             type="password"
             id="password"
+            autoComplete="current-password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
-            required
           />
-        </div>
-        {/* Error field to show if submit did not work*/}
-        <button type="submit">Login</button>
-        {output && <p className="output">{output}</p>}
-      </form>
-    </div>
+          <Button
+            type="submit"
+            fullWidth
+            variant="contained"
+            sx={{ mt: 3, mb: 2 }}
+          >
+            Login
+          </Button>
+          {output && <Alert severity="error">{output}</Alert>}
+        </Box>
+      </Box>
+    </Container>
   );
 }
 

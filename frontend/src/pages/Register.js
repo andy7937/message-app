@@ -1,8 +1,7 @@
+// src/components/Register.js
 import React, { useState } from 'react';
 import axios from 'axios';
-import '../App.css';
-
-// username password email phonenum 
+import { Container, TextField, Button, Typography, Box, Alert } from '@mui/material';
 
 function Register() {
   const [username, setUsername] = useState('');
@@ -10,17 +9,17 @@ function Register() {
   const [confirmPassword, setConfirmPassword] = useState('');
   const [email, setEmail] = useState('');
   const [phonenum, setPhonenum] = useState('');
-  const [output, setOutput] = useState('');
+  const [output, setOutput] = useState({ message: '', type: '' });
 
   const handleSubmit = (e) => {
     e.preventDefault();
     if (password !== confirmPassword) {
-      setOutput('Passwords do not match');
+      setOutput({ message: 'Passwords do not match', type: 'error' });
       return;
     } 
 
     if (!username || !password || !email || !phonenum) {
-      setOutput('Please fill out all fields');
+      setOutput({ message: 'Please fill out all fields', type: 'error' });
       return;
     }
     
@@ -34,94 +33,117 @@ function Register() {
     })
     .then(response => {
       console.log(response.data);
-      setOutput(response.data.message);
+      setOutput({ message: 'Registration successful', type: 'success' });
     })
     .catch(error => {
       if (error.response) {
         // Backend returned an error response
         if (error.response.data && error.response.data.error) {
-          setOutput(error.response.data.error);
+          setOutput({ message: error.response.data.error, type: 'error' });
         } 
-
       } 
       else if (error.request) {
         // No response from backend
-        setOutput('No response from server. Please check your connection.');
+        setOutput({ message: 'No response from server. Please check your connection.', type: 'error' });
       } 
-
       else {
         // Unexpected error
-        setOutput('An error occurred. Please try again.');
+        setOutput({ message: 'An error occurred. Please try again.', type: 'error' });
       }
-      
       console.error('There was an error registering!', error);
     });
   };
 
   return (
-    <div className="register-container">
-      <h2>Register</h2>
-      <form onSubmit={handleSubmit}>
-
-        <div className="form-group">
-          <label htmlFor="username">Username</label>
-          <input
-            type="text"
+    <Container maxWidth="xs">
+      <Box
+        sx={{
+          marginTop: 8,
+          display: 'flex',
+          flexDirection: 'column',
+          alignItems: 'center',
+        }}
+      >
+        <Typography component="h1" variant="h5">
+          Register
+        </Typography>
+        <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
+          <TextField
+            margin="normal"
+            required
+            fullWidth
             id="username"
+            label="Username"
+            name="username"
+            autoComplete="username"
+            autoFocus
             value={username}
             onChange={(e) => setUsername(e.target.value)}
-            required
           />
-        </div>
-
-        <div className="form-group">
-          <label htmlFor="password">Password</label>
-          <input
+          <TextField
+            margin="normal"
+            required
+            fullWidth
+            name="password"
+            label="Password"
             type="password"
             id="password"
+            autoComplete="current-password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
-            required
           />
-        </div>
-
-        <div className="form-group">
-          <label htmlFor="confirm-password">Confirm Password</label>
-          <input
+          <TextField
+            margin="normal"
+            required
+            fullWidth
+            name="confirm-password"
+            label="Confirm Password"
             type="password"
             id="confirm-password"
+            autoComplete="confirm-password"
             value={confirmPassword}
             onChange={(e) => setConfirmPassword(e.target.value)}
-            required
           />
-        </div>
-
-        <div className="form-group">
-          <label htmlFor="email">Email</label>
-          <input
+          <TextField
+            margin="normal"
+            required
+            fullWidth
+            name="email"
+            label="Email"
             type="email"
             id="email"
+            autoComplete="email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
-            required
           />
-        </div>
-
-        <div className="form-group">
-          <label htmlFor="phonenum">Phone Number</label>
-          <input
+          <TextField
+            margin="normal"
+            required
+            fullWidth
+            name="phonenum"
+            label="Phone Number"
             type="phonenum"
             id="phonenum"
+            autoComplete="phonenum"
             value={phonenum}
             onChange={(e) => setPhonenum(e.target.value)}
-            required
           />
-        </div>
-        {/* Error field to show if submit did not work*/}
-        <button type="submit">Register</button>
-        {output && <p className="output">{output}</p>}
-      </form>
-    </div>
+          <Button
+            type="submit"
+            fullWidth
+            variant="contained"
+            sx={{ mt: 3, mb: 2 }}
+          >
+            Register
+          </Button>
+          {output.message && (
+            <Alert severity={output.type} sx={{ mt: 2 }}>
+              {output.message}
+            </Alert>
+          )}
+        </Box>
+      </Box>
+    </Container>
   );
 }
 

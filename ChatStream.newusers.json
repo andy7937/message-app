@@ -1,0 +1,75 @@
+[{
+  "_id": {
+    "$oid": "669a668a35e3321a2c7e3caf"
+  },
+  "username": "Andy",
+  "email": "lee.andy2004@gmail.com",
+  "password": "$2a$10$Q72aoNX32svETQeCjJO5ieY1/bW77bDaBkddzuvzEa4kvtXUEeYoK",
+  "phonenum": "0221501234",
+  "friends": [
+    "Andrew",
+    "Jason"
+  ],
+  "friendsPending": [
+    "James",
+    "Junha"
+  ],
+  "tokens": [],
+  "__v": 6
+},
+{
+  "_id": {
+    "$oid": "669a66f735e3321a2c7e3cb3"
+  },
+  "username": "Andrew",
+  "email": "hyungkyun@gmail.com",
+  "password": "$2a$10$VSuOTOHbgZH9DujndA125.4UwxJx1BKbPH0ng3fPh02J1LUBrE15K",
+  "phonenum": "12355676",
+  "friends": [
+    "Andy"
+  ],
+  "friendsPending": [],
+  "tokens": [],
+  "__v": 1
+},
+{
+  "_id": {
+    "$oid": "669a671235e3321a2c7e3cbc"
+  },
+  "username": "Jason",
+  "email": "jason.lee@gmail.com",
+  "password": "$2a$10$gnzjPLSEKU6SZpf1vNcOrOpa9nzsC5xIroAJ3GzZWuC0JRpTbZ/hW",
+  "phonenum": "012492835",
+  "friends": [
+    "Andy"
+  ],
+  "friendsPending": [],
+  "tokens": [],
+  "__v": 1
+},
+{
+  "_id": {
+    "$oid": "669a672235e3321a2c7e3cc0"
+  },
+  "username": "James",
+  "email": "james@gmail.com",
+  "password": "$2a$10$f7pP.jbV86Fpp/exhy52iOQAxwgCkIHdah5Vx0jySg3qPPPp33Fiy",
+  "phonenum": "343426",
+  "friends": [],
+  "friendsPending": [],
+  "tokens": [],
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "669a672c35e3321a2c7e3cc4"
+  },
+  "username": "Junha",
+  "email": "junha@gmail.com",
+  "password": "$2a$10$PWfTtMc2SBL0V5QQ9HM80uma7WWVGCJ6HYofDJDT7PH6uQpQ72OO2",
+  "phonenum": "43563489",
+  "friends": [],
+  "friendsPending": [],
+  "tokens": [],
+  "__v": 0
+}]

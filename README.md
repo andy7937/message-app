@@ -37,6 +37,7 @@ Voice chat
 Group chats  
 image sending  
 email verification when registering  
+encryption of messages
 
 
 # End to End/full-stack workflow

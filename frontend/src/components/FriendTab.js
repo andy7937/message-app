@@ -1,6 +1,7 @@
 // src/components/FriendTab.js
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
+import { Typography, List, ListItem, ListItemText, Paper } from '@mui/material';
 
 const FriendTab = ({ friends }) => {
   const navigate = useNavigate();
@@ -11,20 +12,23 @@ const FriendTab = ({ friends }) => {
   };
 
   return (
-    <div>
-      <h3>Current Friends</h3>
-      <ul>
+    <Paper elevation={3} style={{ padding: '1rem', marginTop: '1rem' }}>
+      <Typography variant="h5" component="h3" gutterBottom>
+        Current Friends
+      </Typography>
+      <List>
         {friends.map((username, index) => (
-          <li
+          <ListItem
+            button
             key={index}
             onClick={() => handleFriendClick(username)}
             style={{ cursor: 'pointer', color: 'blue' }}
           >
-            {username}
-          </li>
+            <ListItemText primary={username} />
+          </ListItem>
         ))}
-      </ul>
-    </div>
+      </List>
+    </Paper>
   );
 };
 

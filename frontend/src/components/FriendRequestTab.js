@@ -1,6 +1,9 @@
 // src/components/FriendRequestTab.js
 import React from 'react';
 import axios from 'axios';
+import { Typography, List, ListItem, ListItemText, ListItemSecondaryAction, IconButton, Paper, ButtonGroup } from '@mui/material';
+import CheckIcon from '@mui/icons-material/Check';
+import CloseIcon from '@mui/icons-material/Close';
 
 const FriendRequestTab = ({ pendingRequests, setPendingRequests }) => {
   const handleAccept = (friendUsername) => {
@@ -32,18 +35,28 @@ const FriendRequestTab = ({ pendingRequests, setPendingRequests }) => {
   };
 
   return (
-    <div>
-      <h3>Pending Friend Requests</h3>
-      <ul>
+    <Paper elevation={3} style={{ padding: '1rem', marginTop: '1rem' }}>
+      <Typography variant="h5" component="h3" gutterBottom>
+        Pending Friend Requests
+      </Typography>
+      <List>
         {pendingRequests.map((username, index) => (
-          <li key={index}>
-            {username}
-            <button onClick={() => handleAccept(username)}>Accept</button>
-            <button onClick={() => handleDecline(username)}>Decline</button>
-          </li>
+          <ListItem key={index}>
+            <ListItemText primary={username} />
+            <ListItemSecondaryAction>
+              <ButtonGroup>
+                <IconButton edge="end" aria-label="accept" onClick={() => handleAccept(username)}>
+                  <CheckIcon />
+                </IconButton>
+                <IconButton edge="end" aria-label="decline" onClick={() => handleDecline(username)}>
+                  <CloseIcon />
+                </IconButton>
+              </ButtonGroup>
+            </ListItemSecondaryAction>
+          </ListItem>
         ))}
-      </ul>
-    </div>
+      </List>
+    </Paper>
   );
 };
 
