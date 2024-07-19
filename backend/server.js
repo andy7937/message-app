@@ -5,9 +5,10 @@ const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const userRoutes = require('./src/routes/userRoutes');
 const dashboardRoutes = require('./src/routes/dashboardRoutes'); // Import dashboardRoutes
+require('dotenv').config(); // Load environment variables from .env file
 
 const app = express();
-const port = process.env.PORT || 5001;
+const port = 5001;
 
 // Middleware
 app.use(bodyParser.json());

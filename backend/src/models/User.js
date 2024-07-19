@@ -32,7 +32,15 @@ const userSchema = new mongoose.Schema({
   // array of pending friend requests with their username
   friendsPending: [{
     type: String, 
-  }]
+  }],
+  tokens: [
+    {
+      token: {
+        type: String,
+        required: true,
+      },
+    },
+  ],
   
 });
 

@@ -1,7 +1,8 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import axios from 'axios';
 import '../App.css';
 import { Navigate } from 'react-router-dom';
+import { AuthContext } from '../components/AuthContext';
 
 // username password email phonenum 
 
@@ -10,6 +11,7 @@ function Login() {
   const [password, setPassword] = useState('');
   const [output, setOutput] = useState('');
   const [navigate, setNavigate] = useState(false);
+  const { setToken } = useContext(AuthContext);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -20,6 +22,8 @@ function Login() {
       password
     })
     .then(response => {
+      setToken(response.data.token);
+      localStorage.setItem("token", response.data.token);
       console.log(response.data);
       setOutput(response.data.message);
       localStorage.setItem('username', username);
@@ -27,6 +31,8 @@ function Login() {
       
     })
     .catch(error => {
+      setToken(null);
+      localStorage.removeItem("token");
       if (error.response) {
         // Backend returned an error response
         if (error.response.data && error.response.data.error) {

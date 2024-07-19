@@ -1,6 +1,7 @@
 // src/controllers/userController.js
 const User = require('../models/User');
 const bcrypt = require('bcryptjs');
+const jwt = require("jsonwebtoken");
 
 exports.registerUser = async (req, res) => {
   const { username, email, password, phonenum } = req.body;
@@ -57,7 +58,9 @@ exports.loginUser = async (req, res) => {
       return res.status(402).json({ error: 'Password incorrect' });
     }
 
-    res.status(200).json({ message: 'User Login Successful' });
+    const token = jwt.sign({ userId: user.id }, process.env.JWT_SECRET);
+
+    res.status(200).json({ message: 'User Login Successful', token });
   } catch (error) {
     res.status(500).json({ error: 'Server error' });
   }

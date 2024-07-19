@@ -1,18 +1,21 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import axios from 'axios';
 import '../App.css';
 import FriendRequestTab from '../components/FriendRequestTab'; 
 import FriendTab from '../components/FriendTab'; 
+import { AuthContext } from '../components/AuthContext';
+import { Navigate } from 'react-router-dom';
 
 
 // username password email phonenum 
 
 function Dashboard() {
+
   const [friendusername, setFriendUsername] = useState('');
   const [output, setOutput] = useState('');
   const [pendingRequests, setPendingRequests] = useState([]);
   const [friends, setFriends] = useState([]);
-
+  const { token, loading } = useContext(AuthContext);
 
   useEffect(() => {
     const username = localStorage.getItem('username');
@@ -25,6 +28,16 @@ function Dashboard() {
         console.error('Error fetching user data', error);
       });
   }, []);
+
+
+  if (loading) {
+    return null;
+  }
+
+  if (!token) {
+    return <Navigate to="/login" replace />;
+  }
+
 
   const handleSubmit = (e) => {
     e.preventDefault();
