@@ -1,20 +1,24 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import axios from 'axios';
 import '../App.css';
 import FriendRequestTab from '../components/FriendRequestTab'; 
 import FriendTab from '../components/FriendTab'; 
+import { AuthContext } from '../components/AuthContext';
+import { Navigate } from 'react-router-dom';
 
 
 // username password email phonenum 
 
 function Dashboard() {
+
   const [friendusername, setFriendUsername] = useState('');
   const [output, setOutput] = useState('');
   const [pendingRequests, setPendingRequests] = useState([]);
   const [friends, setFriends] = useState([]);
+  const { token, loading } = useContext(AuthContext);
 
-
-  useEffect(() => {
+  // Fetching user data
+  const fetchUserData = () => {
     const username = localStorage.getItem('username');
     axios.get(`http://localhost:5001/api/users/${username}`)
       .then(response => {
@@ -24,7 +28,27 @@ function Dashboard() {
       .catch(error => {
         console.error('Error fetching user data', error);
       });
+  };  
+
+
+  // refreshing data every second
+  useEffect(() => {
+    fetchUserData();
+    const intervalId = setInterval(fetchUserData, 1000); 
+
+    return () => clearInterval(intervalId);
   }, []);
+
+
+
+  if (loading) {
+    return null;
+  }
+
+  if (!token) {
+    return <Navigate to="/login" replace />;
+  }
+
 
   const handleSubmit = (e) => {
     e.preventDefault();
