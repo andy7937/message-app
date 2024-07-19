@@ -44,13 +44,11 @@ function Dashboard() {
         if (error.response.data && error.response.data.error) {
           setOutput(error.response.data.error);
         } 
-
       } 
       else if (error.request) {
         // No response from backend
         setOutput('No response from server. Please check your connection.');
       } 
-
       else {
         // Unexpected error
         setOutput('An error occurred. Please try again.');
