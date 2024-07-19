@@ -8,6 +8,7 @@ import Login from './pages/Login';
 import Register from './pages/Register';
 import Aboutus from './pages/Aboutus';
 import Dashboard from './pages/Dashboard';
+import Chat from './pages/Chat';
 import './App.css';
 
 function App() {
@@ -21,6 +22,7 @@ function App() {
             <Route path="/register" element={<Register />} />
             <Route path="/aboutus" element={<Aboutus />} />
             <Route path="/dashboard" element={<Dashboard />} />
+            <Route path="/chat/:currentUsername/:friendUsername" element={<Chat />} />
           </Routes>
       </Router>
 

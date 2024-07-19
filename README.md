@@ -64,9 +64,6 @@ Mongo DB Collections
 User table  
 UserID username password email phonenum friends(friend ID array) createdAt updatedAt  
 
-Friends table  
-FriendID user1 user2 status(pending, approved, blocked) createdAt updatedAt  
-
 Chats table  
 ChatID senderID receiverID message(string of text) timestamp  
 
