@@ -17,7 +17,8 @@ function Dashboard() {
   const [friends, setFriends] = useState([]);
   const { token, loading } = useContext(AuthContext);
 
-  useEffect(() => {
+  // Fetching user data
+  const fetchUserData = () => {
     const username = localStorage.getItem('username');
     axios.get(`http://localhost:5001/api/users/${username}`)
       .then(response => {
@@ -27,7 +28,17 @@ function Dashboard() {
       .catch(error => {
         console.error('Error fetching user data', error);
       });
+  };  
+
+
+  // refreshing data every second
+  useEffect(() => {
+    fetchUserData();
+    const intervalId = setInterval(fetchUserData, 1000); 
+
+    return () => clearInterval(intervalId);
   }, []);
+
 
 
   if (loading) {

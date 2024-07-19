@@ -26,9 +26,7 @@ exports.friendRequest = async (req, res) => {
 
     // Add the friend to the current user's friend list
     friendUser.friendsPending.push(currentUser.username);
-    currentUser.friendsPending.push(friendUser.username);
     await friendUser.save();
-    await currentUser.save();
 
     res.status(200).json({ message: 'Friend request successful' });
   } catch (error) {
@@ -97,7 +95,6 @@ exports.declineFriendRequest = async (req, res) => {
   
       // Remove the friend from the pending list
       currentUser.friendsPending = currentUser.friendsPending.filter(friend => friend !== friendUser.username);
-      friendUser.friendsPending = friendUser.friendsPending.filter(friend => friend !== currentUser.username);
       await currentUser.save();
       await friendUser.save();
   
