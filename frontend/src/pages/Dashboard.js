@@ -3,8 +3,9 @@ import React, { useState, useEffect, useContext } from 'react';
 import axios from 'axios';
 import FriendRequestTab from '../components/FriendRequestTab'; 
 import FriendTab from '../components/FriendTab'; 
+import GroupChat from '../components/GroupChat'; // Import GroupChat
 import { AuthContext } from '../components/AuthContext';
-import { Navigate } from 'react-router-dom';
+import { Navigate, useNavigate } from 'react-router-dom';
 import { Container, Typography, TextField, Button, Box, Paper, Alert } from '@mui/material';
 
 function Dashboard() {
@@ -13,6 +14,7 @@ function Dashboard() {
   const [pendingRequests, setPendingRequests] = useState([]);
   const [friends, setFriends] = useState([]);
   const { token, loading } = useContext(AuthContext);
+  const navigate = useNavigate();
 
   // Fetching user data
   const fetchUserData = () => {
@@ -26,6 +28,7 @@ function Dashboard() {
         console.error('Error fetching user data', error);
       });
   };
+
 
   // Refreshing data every second
   useEffect(() => {
@@ -86,6 +89,8 @@ function Dashboard() {
 
         <FriendRequestTab pendingRequests={pendingRequests} setPendingRequests={setPendingRequests} />
         <FriendTab friends={friends} />
+        <GroupChat friends={friends} /> 
+
       </Paper>
     </Container>
   );

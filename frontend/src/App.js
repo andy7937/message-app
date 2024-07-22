@@ -8,6 +8,8 @@ import Login from './pages/Login';
 import Register from './pages/Register';
 import Aboutus from './pages/Aboutus';
 import Dashboard from './pages/Dashboard';
+import GroupChat from './components/GroupChat';
+
 import Chat from './pages/Chat';
 import './App.css';
 
@@ -23,6 +25,7 @@ function App() {
             <Route path="/aboutus" element={<Aboutus />} />
             <Route path="/dashboard" element={<Dashboard />} />
             <Route path="/chat/:currentUsername/:friendUsername" element={<Chat />} />
+            <Route path="/groupchat" element={<GroupChat />} />
           </Routes>
       </Router>
 
