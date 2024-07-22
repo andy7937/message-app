@@ -3,9 +3,10 @@ import React, { useState, useEffect, useContext } from 'react';
 import axios from 'axios';
 import FriendRequestTab from '../components/FriendRequestTab'; 
 import FriendTab from '../components/FriendTab'; 
-import GroupChat from '../components/GroupChat'; // Import GroupChat
+import GroupChat from '../components/GroupChat'; 
+import GroupChatTab from '../components/GroupChatTab';
 import { AuthContext } from '../components/AuthContext';
-import { Navigate, useNavigate } from 'react-router-dom';
+import { Navigate } from 'react-router-dom';
 import { Container, Typography, TextField, Button, Box, Paper, Alert } from '@mui/material';
 
 function Dashboard() {
@@ -13,8 +14,8 @@ function Dashboard() {
   const [output, setOutput] = useState('');
   const [pendingRequests, setPendingRequests] = useState([]);
   const [friends, setFriends] = useState([]);
+  const [groupChats, setGroupChats] = useState([]); // State for group chats
   const { token, loading } = useContext(AuthContext);
-  const navigate = useNavigate();
 
   // Fetching user data
   const fetchUserData = () => {
@@ -29,12 +30,29 @@ function Dashboard() {
       });
   };
 
+  // Fetching group chats
+  const fetchGroupChats = () => {
+    const username = localStorage.getItem('username');
+    axios.get(`http://localhost:5001/api/chat/groupchat/${username}`)
+      .then(response => {
+        setGroupChats(response.data);
+      })
+      .catch(error => {
+        console.error('Error fetching group chats', error);
+      });
+  };
 
   // Refreshing data every second
   useEffect(() => {
     fetchUserData();
-    const intervalId = setInterval(fetchUserData, 1000); 
-    return () => clearInterval(intervalId);
+    fetchGroupChats(); // Initial fetch for group chats
+
+    const intervalId = setInterval(() => {
+      fetchUserData();
+      fetchGroupChats(); // Periodic fetch for group chats
+    }, 1000); // 1000ms interval
+
+    return () => clearInterval(intervalId); // Cleanup on unmount
   }, []);
 
   if (loading) {
@@ -89,6 +107,7 @@ function Dashboard() {
 
         <FriendRequestTab pendingRequests={pendingRequests} setPendingRequests={setPendingRequests} />
         <FriendTab friends={friends} />
+        <GroupChatTab groupChats={groupChats} /> 
         <GroupChat friends={friends} /> 
 
       </Paper>
