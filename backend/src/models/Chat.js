@@ -24,6 +24,19 @@ const chatSchema = new mongoose.Schema({
   messages: [messageSchema]
 });
 
-const Chat = mongoose.model('Chat', chatSchema);
+const groupChatSchema = new mongoose.Schema({
+  participants: {
+    type: [String],
+    required: true
+  },
+  name: {
+    type: String,
+    required: true
+  },
+  messages: [messageSchema]
+});
 
-module.exports = Chat;
+const Chat = mongoose.model('Chat', chatSchema);
+const GroupChat = mongoose.model('GroupChat', groupChatSchema);
+
+module.exports = { Chat, GroupChat };

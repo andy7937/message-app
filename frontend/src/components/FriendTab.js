@@ -22,7 +22,7 @@ const FriendTab = ({ friends }) => {
             button
             key={index}
             onClick={() => handleFriendClick(username)}
-            style={{ cursor: 'pointer', color: 'blue' }}
+            style={{ cursor: 'pointer' }}
           >
             <ListItemText primary={username} />
           </ListItem>
