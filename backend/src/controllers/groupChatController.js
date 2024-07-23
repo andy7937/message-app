@@ -30,18 +30,20 @@ exports.createGroupChat = async (req, res) => {
     }
   };
   
-  // get a specific group chat
-  exports.openGroupChat = async (req, res) => {
-    const { groupChatName } = req.params;
-  
-    try {
-      const groupChat = await GroupChat.findOne({ name : groupChatName });
-      res.status(200).json(groupChat);
+// Get a specific group chat
+exports.openGroupChat = async (req, res) => {
+  const { groupChatName } = req.params;
+
+  try {
+    const groupChat = await GroupChat.findOne({ name: groupChatName });
+    if (!groupChat) {
+      return res.status(404).json({ error: 'Group Chat not found' });
     }
-    catch (error) {
-      res.status(500).json({ error: 'Server error' });
-    }
+    res.status(200).json(groupChat);
+  } catch (error) {
+    res.status(500).json({ error: 'Server error' });
   }
+};
   
   
   // Send a group message

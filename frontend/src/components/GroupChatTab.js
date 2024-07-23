@@ -6,7 +6,7 @@ const GroupChatTab = ({ groupChats }) => {
   const navigate = useNavigate();
 
   const handleGroupChatClick = (groupChatName) => {
-    navigate(`/groupchat/${groupChatName}/open`);
+    navigate(`/groupchat/${groupChatName}/${localStorage.getItem('username')}`);
   };
 
   return (
@@ -15,15 +15,15 @@ const GroupChatTab = ({ groupChats }) => {
         Group Chats
       </Typography>
       <List>
-        {Array.isArray(groupChats)? (
-          groupChats.map((groupchats, index) => (
+        {Array.isArray(groupChats) ? (
+          groupChats.map((groupChat, index) => (
             <ListItem
               button
               key={index}
-              onClick={() => handleGroupChatClick(groupchats.name)}
+              onClick={() => handleGroupChatClick(groupChat.name)}
               style={{ cursor: 'pointer' }}
             >
-              <ListItemText primary={groupchats.name} />
+              <ListItemText primary={groupChat.name} />
             </ListItem>
           ))
         ) : (
