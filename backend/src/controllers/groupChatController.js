@@ -22,7 +22,7 @@ exports.createGroupChat = async (req, res) => {
     const { username } = req.params;
   
     try {
-      const groupChats = await GroupChat.findOne({ participants: username });
+      const groupChats = await GroupChat.find({ participants: username });
       res.status(200).json(groupChats);
     }
     catch (error) {

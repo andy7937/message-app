@@ -36,6 +36,7 @@ function Dashboard() {
     axios.get(`http://localhost:5001/api/groupchat/${username}/get`)
       .then(response => {
         setGroupChats(response.data);
+        console.log(response.data);
       })
       .catch(error => {
         console.error('Error fetching group chats', error);

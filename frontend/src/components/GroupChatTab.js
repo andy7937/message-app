@@ -15,15 +15,15 @@ const GroupChatTab = ({ groupChats }) => {
         Group Chats
       </Typography>
       <List>
-        {Array.isArray(groupChats) && groupChats.length > 0 ? (
-          groupChats.map((groupChat, index) => (
+        {Array.isArray(groupChats)? (
+          groupChats.map((groupchats, index) => (
             <ListItem
               button
               key={index}
-              onClick={() => handleGroupChatClick(groupChat.name)}
+              onClick={() => handleGroupChatClick(groupchats.name)}
               style={{ cursor: 'pointer' }}
             >
-              <ListItemText primary={groupChat.name} />
+              <ListItemText primary={groupchats.name} />
             </ListItem>
           ))
         ) : (
