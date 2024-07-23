@@ -23,7 +23,7 @@ const GroupChatTab = ({ groupChats }) => {
               onClick={() => handleGroupChatClick(groupChat.name)}
               style={{ cursor: 'pointer' }}
             >
-              <ListItemText primary={groupChat.name} />
+              <ListItemText primary={groupChat.name} secondary={groupChat.participants.join(' | ')} />
             </ListItem>
           ))
         ) : (
