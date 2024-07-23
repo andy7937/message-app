@@ -6,6 +6,7 @@ const bodyParser = require('body-parser');
 const userRoutes = require('./src/routes/userRoutes');
 const dashboardRoutes = require('./src/routes/dashboardRoutes'); // Import dashboardRoutes
 const chatRoutes = require('./src/routes/chatRoutes'); // Import chatRoutes
+const groupChatRoutes = require('./src/routes/groupChatRoutes'); // Import groupChatRoutes
 require('dotenv').config(); // Load environment variables from .env file
 
 const app = express();
@@ -19,6 +20,7 @@ app.use(cors()); // Enable CORS for all origins
 app.use('/api/users', userRoutes);
 app.use('/api/dashboard', dashboardRoutes);
 app.use('/api/chat', chatRoutes); 
+app.use('/api/groupchat', groupChatRoutes);
 
 
 // Database connection

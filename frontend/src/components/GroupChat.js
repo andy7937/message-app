@@ -23,7 +23,7 @@ const GroupChat = ({ friends }) => {
 
     try {
       const users = [currentUsername, ...selectedFriends];
-      const response = await axios.post('http://localhost:5001/api/chat/creategroupchat', {
+      const response = await axios.post('http://localhost:5001/api/groupchat/creategroupchat', {
         users,
         name: groupName,
       });

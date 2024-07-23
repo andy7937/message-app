@@ -6,7 +6,7 @@ const GroupChatTab = ({ groupChats }) => {
   const navigate = useNavigate();
 
   const handleGroupChatClick = (groupChatName) => {
-    navigate(`/groupchat/${groupChatName}`);
+    navigate(`/groupchat/${groupChatName}/open`);
   };
 
   return (

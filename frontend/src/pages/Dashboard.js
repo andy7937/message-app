@@ -33,7 +33,7 @@ function Dashboard() {
   // Fetching group chats
   const fetchGroupChats = () => {
     const username = localStorage.getItem('username');
-    axios.get(`http://localhost:5001/api/chat/groupchat/${username}`)
+    axios.get(`http://localhost:5001/api/groupchat/${username}/get`)
       .then(response => {
         setGroupChats(response.data);
       })
