@@ -10,7 +10,7 @@ const groupChatRoutes = require('./src/routes/groupChatRoutes'); // Import group
 require('dotenv').config(); // Load environment variables from .env file
 
 const app = express();
-const port = 5001;
+const port = process.env.PORT || 5001;
 
 // Middleware
 app.use(bodyParser.json());
@@ -22,11 +22,11 @@ app.use('/api/dashboard', dashboardRoutes);
 app.use('/api/chat', chatRoutes); 
 app.use('/api/groupchat', groupChatRoutes);
 
-
 // Database connection
-mongoose.connect('mongodb://localhost:27017/ChatStream')
-.then(() => console.log('MongoDB connected'))
-.catch(err => console.log(err));
+const mongoURI = process.env.MONGO_URI || 'mongodb://localhost:27017/ChatStream';
+mongoose.connect(mongoURI, { useNewUrlParser: true, useUnifiedTopology: true })
+  .then(() => console.log('MongoDB connected'))
+  .catch(err => console.log(err));
 
 app.listen(port, () => {
   console.log(`Server running on http://localhost:${port}`);

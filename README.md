@@ -7,6 +7,13 @@ go into backend folder in terminal - start node server.js
 go into frontend folder in terminal - npm start  
 
 
+to push to heroku
+git add .
+git commit -m "Initial commit"
+heroku git:remote -a message-app
+git push heroku master
+heroku login
+
 To turn off mongoDB service  
 win r, services.msc, MongoDB Server  
 
