@@ -8,7 +8,7 @@ import CloseIcon from '@mui/icons-material/Close';
 const FriendRequestTab = ({ pendingRequests, setPendingRequests }) => {
   const handleAccept = (friendUsername) => {
     const username = localStorage.getItem('username');
-    axios.post('http://localhost:5001/api/dashboard/acceptfriendrequest', {
+    axios.post('https://message-app-6e0fca8854dd.herokuapp.com/api/dashboard/acceptfriendrequest', {
       usernameCur: username,
       usernameFri: friendUsername
     })
@@ -22,7 +22,7 @@ const FriendRequestTab = ({ pendingRequests, setPendingRequests }) => {
 
   const handleDecline = (friendUsername) => {
     const username = localStorage.getItem('username');
-    axios.post('http://localhost:5001/api/dashboard/declinefriendrequest', {
+    axios.post('https://message-app-6e0fca8854dd.herokuapp.com/api/dashboard/declinefriendrequest', {
       usernameCur: username,
       usernameFri: friendUsername
     })

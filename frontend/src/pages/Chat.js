@@ -47,7 +47,7 @@ const Chat = () => {
 
   const fetchChatData = useCallback(async () => {
     try {
-      const response = await axios.get(`http://localhost:5001/api/chat/${currentUsername}/${friendUsername}`);
+      const response = await axios.get(`https://message-app-6e0fca8854dd.herokuapp.com/api/chat/${currentUsername}/${friendUsername}`);
       setMessages(response.data.messages);
       setError('');
     } catch (err) {
@@ -65,7 +65,7 @@ const Chat = () => {
   const handleSendMessage = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post(`http://localhost:5001/api/chat/${currentUsername}/${friendUsername}/message`, {
+      const response = await axios.post(`https://message-app-6e0fca8854dd.herokuapp.com/api/chat/${currentUsername}/${friendUsername}/message`, {
         sender: currentUsername,
         message: newMessage,
       });

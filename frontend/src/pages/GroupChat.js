@@ -46,7 +46,7 @@ const GroupChat = () => {
 
   const fetchGroupChatData = useCallback(async () => {
     try {
-      const response = await axios.get(`http://localhost:5001/api/groupchat/${groupChatName}/open`);
+      const response = await axios.get(`https://message-app-6e0fca8854dd.herokuapp.com/api/groupchat/${groupChatName}/open`);
       setMessages(response.data.messages);
       setError('');
     } catch (err) {
@@ -64,7 +64,7 @@ const GroupChat = () => {
   const handleSendMessage = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post(`http://localhost:5001/api/groupchat/${groupChatName}/message`, {
+      const response = await axios.post(`https://message-app-6e0fca8854dd.herokuapp.com/api/groupchat/${groupChatName}/message`, {
         sender: currentUsername,
         message: newMessage,
         groupChatName: groupChatName,

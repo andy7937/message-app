@@ -6,13 +6,16 @@ Project started to gain an understanding of how to use React, Node and MongoDB a
 go into backend folder in terminal - start node server.js  
 go into frontend folder in terminal - npm start  
 
-
+make sure to be in backend
 to push to heroku
 git add .
 git commit -m "Initial commit"
 heroku git:remote -a message-app
 git push heroku master
 heroku login
+
+make sure to be in frontend
+npm run build
 
 To turn off mongoDB service  
 win r, services.msc, MongoDB Server  

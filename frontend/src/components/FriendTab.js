@@ -15,7 +15,7 @@ const FriendTab = ({ friends }) => {
   const handleDeleteClick = async (event, currentUsername, username) => {
     event.stopPropagation();
     if (window.confirm('Are you sure you want to remove this friend?')) {
-      axios.post('http://localhost:5001/api/dashboard/removefriend', {
+      axios.post('https://message-app-6e0fca8854dd.herokuapp.com/api/dashboard/removefriend', {
         usernameCur: currentUsername,
         usernameFri: username
       })
@@ -26,7 +26,7 @@ const FriendTab = ({ friends }) => {
         console.error('Error declining friend request', error);
       });
 
-      axios.delete(`http://localhost:5001/api/chat/${currentUsername}/${username}/delete`)
+      axios.delete(`https://message-app-6e0fca8854dd.herokuapp.com/api/chat/${currentUsername}/${username}/delete`)
     }
   };
 

@@ -25,7 +25,7 @@ function Register() {
     
     // Handle registration logic here 
     // Send data to the backend
-    axios.post('http://localhost:5001/api/users/register', {
+    axios.post('https://message-app-6e0fca8854dd.herokuapp.com/api/users/register', {
       username,
       password,
       email,

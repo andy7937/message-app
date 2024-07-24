@@ -20,7 +20,7 @@ function Dashboard() {
   // Fetching user data
   const fetchUserData = () => {
     const username = localStorage.getItem('username');
-    axios.get(`http://localhost:5001/api/users/${username}`)
+    axios.get(`https://message-app-6e0fca8854dd.herokuapp.com/api/users/${username}`)
       .then(response => {
         setPendingRequests(response.data.friendsPending);
         setFriends(response.data.friends);
@@ -33,7 +33,7 @@ function Dashboard() {
   // Fetching group chats
   const fetchGroupChats = () => {
     const username = localStorage.getItem('username');
-    axios.get(`http://localhost:5001/api/groupchat/${username}/get`)
+    axios.get(`https://message-app-6e0fca8854dd.herokuapp.com/api/groupchat/${username}/get`)
       .then(response => {
         setGroupChats(response.data);
         console.log(response.data);
@@ -66,7 +66,7 @@ function Dashboard() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    axios.post('http://localhost:5001/api/dashboard/friendrequest', {
+    axios.post('https://message-app-6e0fca8854dd.herokuapp.com/api/dashboard/friendrequest', {
       usernameFri: friendusername,
       usernameCur: localStorage.getItem('username')
     })

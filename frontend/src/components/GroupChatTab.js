@@ -15,7 +15,7 @@ const GroupChatTab = ({ groupChats }) => {
     event.stopPropagation();
     if (window.confirm('Are you sure you want to delete this group chat?')) {
       try {
-        const response = await axios.delete(`http://localhost:5001/api/groupchat/${groupChatName}/delete`);
+        const response = await axios.delete(`https://message-app-6e0fca8854dd.herokuapp.com/api/groupchat/${groupChatName}/delete`);
       } catch (err) {
         console.error('Error deleting group chat', err);
       }
