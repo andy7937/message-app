@@ -10,6 +10,7 @@ const groupChatRoutes = require('./src/routes/groupChatRoutes');
 
 const app = express();
 const port = process.env.PORT || 5000; // Fallback to port 5000 if PORT is not set
+const mongoURI = process.env.MONGODB_URI || 'mongodb+srv://andy:helloyellow123@messageapp.wjpp3oh.mongodb.net/';
 
 // Middleware
 app.use(bodyParser.json());
@@ -22,7 +23,6 @@ app.use('/api/chat', chatRoutes);
 app.use('/api/groupchat', groupChatRoutes);
 
 // Database connection
-const mongoURI = process.env.MONGODB_URI; // Use environment variable for MongoDB URI
 mongoose.connect(mongoURI)
 
 
