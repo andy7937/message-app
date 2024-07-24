@@ -9,7 +9,7 @@ const chatRoutes = require('./src/routes/chatRoutes');
 const groupChatRoutes = require('./src/routes/groupChatRoutes');
 
 const app = express();
-const PORT = process.env.PORT; // Use environment variable for port
+const port = process.env.PORT; // Use environment variable for port
 
 // Middleware
 app.use(bodyParser.json());
@@ -27,6 +27,6 @@ mongoose.connect(mongoURI, { useNewUrlParser: true, useUnifiedTopology: true })
   .then(() => console.log('MongoDB connected'))
   .catch(err => console.log('MongoDB connection error:', err));
 
-app.listen(PORT, () => {
-  console.log(`Server running on ${PORT}`);
+app.listen(port, () => {
+  console.log(`Server running on ${port}`);
 });
