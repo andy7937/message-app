@@ -7,8 +7,6 @@ const userRoutes = require('./src/routes/userRoutes');
 const dashboardRoutes = require('./src/routes/dashboardRoutes'); // Import dashboardRoutes
 const chatRoutes = require('./src/routes/chatRoutes'); // Import chatRoutes
 const groupChatRoutes = require('./src/routes/groupChatRoutes'); // Import groupChatRoutes
-require('dotenv').config(); // Load environment variables from .env file
-
 const app = express();
 const PORT = process.env.PORT || 5001;
 
@@ -29,5 +27,5 @@ mongoose.connect(mongoURI, { useNewUrlParser: true, useUnifiedTopology: true })
   .catch(err => console.log(err));
 
 app.listen(PORT, () => {
-  console.log(`Server running on http://localhost:${port}`);
+  console.log(`Server running on http://localhost:${PORT}`);
 });
