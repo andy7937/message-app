@@ -1,0 +1,59 @@
+[33me60cc96b[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mmaster[m[33m, [m[1;31mheroku/master[m[33m)[m HEAD@{0}: commit: update
+[33mba0254df[m HEAD@{1}: commit: update
+[33m748613d6[m HEAD@{2}: commit: update
+[33m8fcf57f3[m HEAD@{3}: commit: update
+[33md9d83349[m HEAD@{4}: commit: update
+[33m01d55409[m HEAD@{5}: commit: update
+[33m1eda0a85[m HEAD@{6}: commit: update
+[33m4675e5a3[m HEAD@{7}: commit: update
+[33mc1e99f62[m HEAD@{8}: commit: update
+[33mac29a13c[m HEAD@{9}: commit: update
+[33m1319f7ad[m HEAD@{10}: commit: update
+[33mb0178e16[m HEAD@{11}: pull heroku master --allow-unrelated-histories: Merge made by the 'ort' strategy.
+[33mbce74f74[m HEAD@{12}: commit: update mongdb atlas
+[33m02e79a11[m HEAD@{13}: pull: Fast-forward
+[33m7c1de6ee[m HEAD@{14}: reset: moving to HEAD
+[33m7c1de6ee[m HEAD@{15}: commit: added participant list in each group on the group chat on dashboard
+[33m07c890e7[m HEAD@{16}: commit: completed groupchat component, need to make it so it shows everyone inside the groupchat
+[33m6360cfb5[m HEAD@{17}: commit: fixed the sending the groupchats to the groupchattab by sending the arrays of all groupchats associated with name
+[33m2f98d720[m HEAD@{18}: commit: moved group chat controllers and routing outside of chat still need to fix showing groupchats and then messageing
+[33m2dd447cd[m HEAD@{19}: reset: moving to HEAD
+[33m2dd447cd[m HEAD@{20}: commit: making groupchattab to show group chats available, problem with the groupchat object passed from the backend to the dashboard to the groupchattab
+[33m24b85671[m HEAD@{21}: pull: Fast-forward
+[33maeea0469[m HEAD@{22}: reset: moving to HEAD
+[33maeea0469[m HEAD@{23}: commit: added a more realistic example db and also made the UI template more minimalistic and good to look at using Material-UI
+[33m21217423[m HEAD@{24}: commit: added basic chat schema and components. most functionalities should work now including chatting. want to add group chats
+[33mb2e77f75[m HEAD@{25}: pull: Fast-forward
+[33m71bde4c5[m HEAD@{26}: checkout: moving from Auth to master
+[33me44a2632[m[33m ([m[1;31morigin/Auth[m[33m)[m HEAD@{27}: commit: made example database and added updates on the spot for pending friend requests and current friends lists
+[33m96e6d84c[m HEAD@{28}: pull origin Auth: Fast-forward
+[33m71bde4c5[m HEAD@{29}: checkout: moving from master to Auth
+[33m71bde4c5[m HEAD@{30}: commit: save
+[33m1cd6bbe3[m HEAD@{31}: commit: added a current friends tab and friends request tab components that can be reused
+[33m07f101a9[m HEAD@{32}: commit: added pending friends and functionality to accept and decline friend requests
+[33m5f3f36ed[m HEAD@{33}: commit: fixed some minor bugs and also added the request function, need to add an accept or decline button for requests
+[33m30f7d50a[m HEAD@{34}: commit: added dashboard controllers and routes for dashboard commands. Will be adding pending requests
+[33m9dca1d14[m HEAD@{35}: pull: Fast-forward
+[33m47b347fd[m HEAD@{36}: pull: Fast-forward
+[33m09f05db8[m HEAD@{37}: commit: added some extra error response information to debug
+[33m7bbf42b5[m HEAD@{38}: commit: added login functionality that changes to dashboard if correct
+[33m8d33eecf[m HEAD@{39}: commit: adding login logic
+[33m1631cd5d[m HEAD@{40}: commit: fixed spacing readme
+[33m6459a486[m HEAD@{41}: commit: added some more context to how the end to end workflow is done in the code
+[33m244a3eed[m HEAD@{42}: commit: added more info passing through the response and errors for more specific outcomes such as email already used, username already used, etc
+[33m5cfd51b7[m HEAD@{43}: commit: added register functionality and learnt how to send data from react frontend to the backend node, and from there process the data and then send it into the mongodb database
+[33m7a5565bf[m HEAD@{44}: commit: added some frontend code for the seperate pages, a nav bar on the app.js, and a footer at the bottom
+[33mb29a946c[m HEAD@{45}: commit: fixed vulnerablities in react
+[33m76eb69cc[m HEAD@{46}: commit: final commit with readme
+[33m2b743b55[m HEAD@{47}: commit: final initial commit
+[33m6c46ec62[m HEAD@{48}: commit: added .env to gitignore for mongo_uri and port to be secure
+[33m18208a71[m HEAD@{49}: commit: updated README to add context
+[33m18d4f374[m HEAD@{50}: commit: changed server location and setup mongoDB to work properly and connected to mongo compass. Gave some information in readme about context and structure of project and how to run
+[33mdfa69965[m HEAD@{51}: rebase (finish): returning to refs/heads/master
+[33mdfa69965[m HEAD@{52}: rebase (start): checkout HEAD~1
+[33m396a1e76[m HEAD@{53}: rebase (finish): returning to refs/heads/master
+[33m396a1e76[m HEAD@{54}: rebase (start): checkout HEAD~1
+[33m396a1e76[m HEAD@{55}: commit: changed server location and setup mongoDB to work properly and connected to mongo compass. Gave some information in readme about context and structure of project and how to run
+[33mdfa69965[m HEAD@{56}: reset: moving to HEAD~1
+[33m44dcc637[m HEAD@{57}: commit: changed server location and setup mongoDB to work properly and connected to mongo compass. Gave some information in readme about context and structure of project and how to run
+[33mdfa69965[m HEAD@{58}: commit (initial): initial commit
