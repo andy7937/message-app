@@ -9,7 +9,7 @@ const chatRoutes = require('./src/routes/chatRoutes');
 const groupChatRoutes = require('./src/routes/groupChatRoutes');
 
 const app = express();
-const port = process.env.PORT || 5001; // Use the port from the environment or default to 5001 for local development
+const port = process.env.PORT || 5000; // Fallback to port 5000 if PORT is not set
 
 // Middleware
 app.use(bodyParser.json());
@@ -23,9 +23,8 @@ app.use('/api/groupchat', groupChatRoutes);
 
 // Database connection
 const mongoURI = process.env.MONGODB_URI; // Use environment variable for MongoDB URI
-mongoose.connect(mongoURI, { useNewUrlParser: true, useUnifiedTopology: true })
-  .then(() => console.log('MongoDB connected'))
-  .catch(err => console.log('MongoDB connection error:', err));
+mongoose.connect(mongoURI)
+
 
 app.listen(port, () => {
   console.log(`Server running on ${port}`);
