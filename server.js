@@ -23,7 +23,7 @@ app.use('/api/chat', chatRoutes);
 app.use('/api/groupchat', groupChatRoutes);
 
 // Database connection
-const mongoURI = process.env.MONGO_URI || 'mongodb://localhost:27017/ChatStream';
+const mongoURI = 'mongodb://localhost:27017/ChatStream';
 mongoose.connect(mongoURI, { useNewUrlParser: true, useUnifiedTopology: true })
   .then(() => console.log('MongoDB connected'))
   .catch(err => console.log(err));
