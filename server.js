@@ -10,7 +10,7 @@ const groupChatRoutes = require('./src/routes/groupChatRoutes'); // Import group
 require('dotenv').config(); // Load environment variables from .env file
 
 const app = express();
-const port = process.env.PORT || 5001;
+const port = 5001;
 
 // Middleware
 app.use(bodyParser.json());
