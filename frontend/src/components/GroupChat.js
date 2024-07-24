@@ -7,6 +7,7 @@ const GroupChat = ({ friends }) => {
   const [groupName, setGroupName] = useState('');
   const currentUsername = localStorage.getItem('username');
 
+
   const handleFriendClick = (friendUsername) => {
     setSelectedFriends((prevSelectedFriends) =>
       prevSelectedFriends.includes(friendUsername)
@@ -26,6 +27,7 @@ const GroupChat = ({ friends }) => {
       const response = await axios.post('http://localhost:5001/api/groupchat/creategroupchat', {
         users,
         name: groupName,
+        admins: [currentUsername]
       });
       console.log(response.data);
     } catch (error) {

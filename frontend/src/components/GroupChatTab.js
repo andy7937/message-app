@@ -1,13 +1,28 @@
 import React from 'react';
+import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
-import { Typography, List, ListItem, ListItemText, Paper } from '@mui/material';
+import { Typography, List, ListItem, ListItemText, Paper, Button } from '@mui/material';
 
 const GroupChatTab = ({ groupChats }) => {
   const navigate = useNavigate();
 
+
   const handleGroupChatClick = (groupChatName) => {
     navigate(`/groupchat/${groupChatName}/${localStorage.getItem('username')}`);
   };
+
+  const handleDeleteClick = async (event, groupChatName) => {
+    event.stopPropagation();
+    if (window.confirm('Are you sure you want to delete this group chat?')) {
+      try {
+        const response = await axios.delete(`http://localhost:5001/api/groupchat/${groupChatName}/delete`);
+      } catch (err) {
+        console.error('Error deleting group chat', err);
+      }
+    }
+  };
+
+
 
   return (
     <Paper elevation={3} style={{ padding: '1rem', marginTop: '1rem' }}>
@@ -24,8 +39,15 @@ const GroupChatTab = ({ groupChats }) => {
               style={{ cursor: 'pointer' }}
             >
               <ListItemText primary={groupChat.name} secondary={groupChat.participants.join(' | ')} />
+
+              {groupChat.admins.includes(localStorage.getItem('username')) && (
+                <Button variant="contained" color="secondary" onClick={(event) => handleDeleteClick(event, groupChat.name)}>
+                  Delete
+                </Button>
+              )}
             </ListItem>
           ))
+
         ) : (
           <Typography>No group chats available</Typography>
         )}

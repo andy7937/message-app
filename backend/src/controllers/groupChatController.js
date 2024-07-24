@@ -2,13 +2,13 @@ const { GroupChat } = require('../models/GroupChat');
 
 // Create or retrieve group chat
 exports.createGroupChat = async (req, res) => {
-    const { users, name } = req.body;
+    const { users, name, admins } = req.body;
     const participants = users.sort();
   
     try {
       let groupChat = await GroupChat.findOne({ participants, name });
       if (!groupChat) {
-        groupChat = new GroupChat({ participants, name, messages: [] });
+        groupChat = new GroupChat({ participants, admins, name, messages: [] });
         await groupChat.save();
       }
       res.status(200).json(groupChat);
@@ -65,3 +65,18 @@ exports.openGroupChat = async (req, res) => {
       res.status(500).json({ error: 'Server error' });
     }
   };
+
+  exports.deleteGroupChat = async (req, res) => {
+    const { groupChatName } = req.params;
+  
+    try {
+      const groupChat = await GroupChat.findOneAndDelete({ name: groupChatName });
+      if (!groupChat) {
+        return res.status(404).json({ error: 'Group Chat not found' });
+      }
+      res.status(200).json({ message: 'Group Chat deleted' });
+    }
+    catch (error) {
+      res.status(500).json({ error: 'Server error' });
+    }
+  }

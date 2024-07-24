@@ -7,5 +7,6 @@ router.post('/creategroupchat', groupChatController.createGroupChat); // Create 
 router.get('/:username/get', groupChatController.getGroupChat); // Get all group chats for a user
 router.get('/:groupChatName/open', groupChatController.openGroupChat); // Get a specific group chat
 router.post('/:groupChatName/message', groupChatController.sendGroupMessage); // Send a message in a group chat
+router.delete('/:groupChatName/delete', groupChatController.deleteGroupChat); // Delete a group chat
 
 module.exports = router;

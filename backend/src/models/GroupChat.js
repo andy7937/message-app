@@ -22,6 +22,10 @@ const groupChatSchema = new mongoose.Schema({
     type: [String],
     required: true
   },
+  admins:{
+    type: [String],
+    required: true
+  },
   name: {
     type: String,
     required: true
