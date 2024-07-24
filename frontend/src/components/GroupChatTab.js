@@ -32,12 +32,7 @@ const GroupChatTab = ({ groupChats }) => {
       <List>
         {Array.isArray(groupChats) ? (
           groupChats.map((groupChat, index) => (
-            <ListItem
-              button
-              key={index}
-              onClick={() => handleGroupChatClick(groupChat.name)}
-              style={{ cursor: 'pointer' }}
-            >
+            <ListItem button key={index} onClick={() => handleGroupChatClick(groupChat.name)} style={{ cursor: 'pointer' }}>
               <ListItemText primary={groupChat.name} secondary={groupChat.participants.join(' | ')} />
 
               {groupChat.admins.includes(localStorage.getItem('username')) && (

@@ -41,3 +41,19 @@ exports.sendMessage = async (req, res) => {
   }
 };
 
+exports.removeChat = async (req, res) => {
+  const { user1, user2 } = req.params;
+  const participants = [user1, user2].sort();
+
+  try {
+    const chat = await Chat.findOneAndDelete({ participants });
+    if (!chat) {
+      return res.status(404).json({ error: 'Chat not found' });
+    }
+
+    res.status(200).json({ message: 'Chat removed' });
+  } catch (error) {
+    res.status(500).json({ error: 'Server error' });
+  }
+}
+

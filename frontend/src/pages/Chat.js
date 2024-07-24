@@ -65,7 +65,7 @@ const Chat = () => {
   const handleSendMessage = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post(`http://localhost:5001/api/chat/${currentUsername}/${friendUsername}`, {
+      const response = await axios.post(`http://localhost:5001/api/chat/${currentUsername}/${friendUsername}/message`, {
         sender: currentUsername,
         message: newMessage,
       });

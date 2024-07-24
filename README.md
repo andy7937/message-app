@@ -34,10 +34,10 @@ retrieve all chats with the person
 
 # Further features after core functionalities are implemented
 Voice chat  
-Group chats  
 image sending  
 email verification when registering  
 encryption of messages
+unfriending
 
 
 # End to End/full-stack workflow

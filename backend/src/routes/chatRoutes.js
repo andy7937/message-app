@@ -5,5 +5,6 @@ const chatController = require('../controllers/chatController');
 // Routes for one-to-one chats
 router.get('/:user1/:user2', chatController.getOrCreateChat); // Retrieve or create a chat
 router.post('/:user1/:user2/message', chatController.sendMessage); // Send a message in a chat
+router.delete('/:user1/:user2/delete', chatController.removeChat); // Delete a chat
 
 module.exports = router;

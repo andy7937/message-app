@@ -104,3 +104,38 @@ exports.declineFriendRequest = async (req, res) => {
       res.status(500).json({ error: 'Server error' });
     }
   };
+
+  exports.removeFriend = async (req, res) => {
+    const { usernameCur, usernameFri } = req.body;
+  
+    try {
+      // Check if the current user exists
+      const currentUser = await User.findOne({ username: usernameCur });
+      if (!currentUser) {
+        return res.status(401).json({ error: 'Current user not found' });
+      }
+
+      const friendUser = await User.findOne({ username : usernameFri });
+      if (!friendUser) {
+        return res.status(401).json({ error: 'Friend user not found' });
+      }
+
+      // Check if they are already friends
+      if (!currentUser.friends.includes(friendUser.username)) {
+        return res.status(400).json({ error: 'Not friends' });
+      }
+
+      // Remove the friend from the current user's friend list
+      currentUser.friends = currentUser.friends.filter(friend => friend !== friendUser.username);
+      friendUser.friends = friendUser.friends.filter(friend => friend !== currentUser.username);
+      await currentUser.save();
+      await friendUser.save();
+
+      res.status(200).json({ message: 'Friend removed successfully' });
+
+    } catch (error) {
+      console.error('Server error:', error);
+      res.status(500).json({ error: 'Server error' });
+    }
+  }
+
