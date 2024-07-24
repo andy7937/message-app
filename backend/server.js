@@ -9,7 +9,7 @@ const chatRoutes = require('./src/routes/chatRoutes');
 const groupChatRoutes = require('./src/routes/groupChatRoutes');
 
 const app = express();
-const port = process.env.PORT; // Use environment variable for port
+const port = process.env.PORT || 5001; // Use the port from the environment or default to 5001 for local development
 
 // Middleware
 app.use(bodyParser.json());
