@@ -3,23 +3,27 @@ Project started to gain an understanding of how to use React, Node and MongoDB a
 
 
 # How to run the app
+To run app on local (use old github repo)
 go into backend folder in terminal - start node server.js  
 go into frontend folder in terminal - npm start  
-
-make sure to be in backend
-to push to heroku
-git add .
-git commit -m "Initial commit"
-heroku git:remote -a message-app
-git push heroku master
-heroku login
-
-make sure to be in frontend
-npm run build
 
 To turn off mongoDB service  
 win r, services.msc, MongoDB Server  
 
+To run app on heroku/netlify
+make sure to be in backend
+to push to heroku
+git add .
+git commit -m "Initial commit"
+heroku git:remote -a message-app (if not already git initialised)
+git push heroku master
+
+make sure to be in frontend
+npm run build
+
+MongoDB atlas to check database
+netify to update frontend
+heroku to update backend 
 
 # Planning of the project
 Overall Structure of the project for user sequence  
