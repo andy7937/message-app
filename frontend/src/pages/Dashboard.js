@@ -1,12 +1,10 @@
 // src/components/Dashboard.js
-import React, { useState, useEffect, useContext } from 'react';
+import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import FriendRequestTab from '../components/FriendRequestTab'; 
 import FriendTab from '../components/FriendTab'; 
 import GroupChat from '../components/GroupChat'; 
 import GroupChatTab from '../components/GroupChatTab';
-import { AuthContext } from '../components/AuthContext';
-import { Navigate } from 'react-router-dom';
 import { Container, Typography, TextField, Button, Box, Paper, Alert } from '@mui/material';
 
 function Dashboard() {
