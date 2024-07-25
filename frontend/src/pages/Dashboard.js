@@ -66,22 +66,32 @@ function Dashboard() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    axios.post('https://message-app-6e0fca8854dd.herokuapp.com/api/dashboard/friendrequest', {
-      usernameFri: friendusername,
-      usernameCur: localStorage.getItem('username')
-    })
-    .then(response => {
-      setOutput(response.data.message);
-    })
-    .catch(error => {
-      if (error.response && error.response.data && error.response.data.error) {
-        setOutput(error.response.data.error);
-      } else if (error.request) {
-        setOutput('No response from server. Please check your connection.');
-      } else {
-        setOutput('An error occurred. Please try again.');
-      }
-    });
+
+    if (friendusername !== localStorage.getItem('username')) {
+      axios.post('https://message-app-6e0fca8854dd.herokuapp.com/api/dashboard/friendrequest', {
+        usernameFri: friendusername,
+        usernameCur: localStorage.getItem('username')
+      })
+      .then(response => {
+        setOutput(response.data.message);
+      })
+      .catch(error => {
+        if (error.response && error.response.data && error.response.data.error) {
+          setOutput(error.response.data.error);
+        } else if (error.request) {
+          setOutput('No response from server. Please check your connection.');
+        } else {
+          setOutput('An error occurred. Please try again.');
+        }
+      });
+    }
+    else if (friendusername === localStorage.getItem('username')) {
+      setOutput('Cannot friend yourself.');
+    }
+    else{
+      setOutput('Please enter a valid username.');
+    }
+    
   };
 
   return (
