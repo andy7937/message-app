@@ -1,10 +1,12 @@
 // src/components/Dashboard.js
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import axios from 'axios';
 import FriendRequestTab from '../components/FriendRequestTab'; 
 import FriendTab from '../components/FriendTab'; 
 import GroupChat from '../components/GroupChat'; 
 import GroupChatTab from '../components/GroupChatTab';
+import { AuthContext } from '../components/AuthContext';
+import { Navigate } from 'react-router-dom';
 import { Container, Typography, TextField, Button, Box, Paper, Alert } from '@mui/material';
 
 function Dashboard() {
@@ -13,6 +15,8 @@ function Dashboard() {
   const [pendingRequests, setPendingRequests] = useState([]);
   const [friends, setFriends] = useState([]);
   const [groupChats, setGroupChats] = useState([]); // State for group chats
+  const { setToken } = useContext(AuthContext);
+  const [loggedOut, setLoggedOut] = useState(false);
 
   // Fetching user data
   const fetchUserData = () => {
@@ -43,8 +47,10 @@ function Dashboard() {
   const handleLogOut = () => {
     localStorage.removeItem('token');
     localStorage.removeItem('username');
-    window.location.href = '/login'; 
+    setToken(null);
+    setLoggedOut(true);
   };
+
   // Refreshing data every second
   useEffect(() => {
     fetchUserData();
@@ -58,6 +64,9 @@ function Dashboard() {
     return () => clearInterval(intervalId); // Cleanup on unmount
   }, []);
 
+  if (loggedOut) {
+    return <Navigate to="/login" replace />;
+  }
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -86,13 +95,12 @@ function Dashboard() {
     else{
       setOutput('Please enter a valid username.');
     }
-    
   };
 
   return (
     <Container maxWidth="md">
       <Paper elevation={3} style={{ padding: '2rem', marginTop: '2rem' }}>
-      <Box display="flex" justifyContent="space-between" alignItems="center">
+        <Box display="flex" justifyContent="space-between" alignItems="center">
           <Typography variant="h4" component="h2" gutterBottom>
             Dashboard
           </Typography>
@@ -119,7 +127,6 @@ function Dashboard() {
         <FriendTab friends={friends} />
         <GroupChatTab groupChats={groupChats} /> 
         <GroupChat friends={friends} /> 
-
       </Paper>
     </Container>
   );
