@@ -15,7 +15,6 @@ function Dashboard() {
   const [pendingRequests, setPendingRequests] = useState([]);
   const [friends, setFriends] = useState([]);
   const [groupChats, setGroupChats] = useState([]); // State for group chats
-  const { token, loading } = useContext(AuthContext);
 
   // Fetching user data
   const fetchUserData = () => {
@@ -61,13 +60,6 @@ function Dashboard() {
     return () => clearInterval(intervalId); // Cleanup on unmount
   }, []);
 
-  if (loading) {
-    return null;
-  }
-
-  if (!token) {
-    return <Navigate to="/login" replace />;
-  }
 
   const handleSubmit = (e) => {
     e.preventDefault();
