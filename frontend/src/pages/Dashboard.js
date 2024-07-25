@@ -43,6 +43,10 @@ function Dashboard() {
       });
   };
 
+  const handleLogOut = () => {
+    localStorage.removeItem('token');
+    localStorage.removeItem('username');
+  }
   // Refreshing data every second
   useEffect(() => {
     fetchUserData();
@@ -97,10 +101,14 @@ function Dashboard() {
   return (
     <Container maxWidth="md">
       <Paper elevation={3} style={{ padding: '2rem', marginTop: '2rem' }}>
-        <Typography variant="h4" component="h2" gutterBottom>
-          Dashboard
-        </Typography>
-
+      <Box display="flex" justifyContent="space-between" alignItems="center">
+          <Typography variant="h4" component="h2" gutterBottom>
+            Dashboard
+          </Typography>
+          <Button variant="contained" color="secondary" onClick={handleLogOut}>
+            Log Out
+          </Button>
+        </Box>
         <Box component="form" onSubmit={handleSubmit} sx={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
           <TextField
             id="friendusername"
