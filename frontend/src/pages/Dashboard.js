@@ -46,8 +46,8 @@ function Dashboard() {
   const handleLogOut = () => {
     localStorage.removeItem('token');
     localStorage.removeItem('username');
-    return <Navigate to="/login" replace />;
-  }
+    window.location.href = '/login'; 
+  };
   // Refreshing data every second
   useEffect(() => {
     fetchUserData();
