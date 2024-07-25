@@ -18,6 +18,9 @@ const Navbar = () => {
                     <NavLink to="/Aboutus" activeStyle>
                         About Us
                     </NavLink>
+                    <NavLink to="/Dashboard" activeStyle>
+                        Dashboard
+                    </NavLink>
                 </NavMenu>
             </Nav>
         </>
