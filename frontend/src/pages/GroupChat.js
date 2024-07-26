@@ -45,6 +45,8 @@ const GroupChat = () => {
   const [error, setError] = useState('');
   const dummy = useRef();
 
+  dummy.current.scrollIntoView({ behavior: 'smooth' });
+
   const fetchGroupChatData = useCallback(async () => {
     try {
       const response = await axios.get(`https://message-app-6e0fca8854dd.herokuapp.com/api/groupchat/${groupChatName}/open`);
@@ -72,8 +74,11 @@ const GroupChat = () => {
       });
       setMessages((prevMessages) => [...prevMessages, response.data]);
       setNewMessage('');
-      dummy.current.scrollIntoView({ behavior: 'smooth' });
       setError('');
+
+      setTimeout(() => {
+        dummy.current.scrollIntoView({ behavior: 'smooth' });
+      }, 0);
     } catch (err) {
       console.error('Error sending message', err);
       setError('Failed to send message');

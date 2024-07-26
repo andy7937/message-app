@@ -46,6 +46,7 @@ const Chat = () => {
   const [error, setError] = useState('');
   const dummy = useRef();
 
+  dummy.current.scrollIntoView({ behavior: 'smooth' });
   const fetchChatData = useCallback(async () => {
     try {
       const response = await axios.get(`https://message-app-6e0fca8854dd.herokuapp.com/api/chat/${currentUsername}/${friendUsername}`);
