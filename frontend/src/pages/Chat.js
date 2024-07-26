@@ -1,5 +1,5 @@
 // src/components/Chat.js
-import React, { useState, useEffect, useCallback } from 'react';
+import React, { useState, useEffect, useCallback, useRef } from 'react';
 import axios from 'axios';
 import { useParams } from 'react-router-dom';
 import { Container, Typography, List, ListItem, ListItemText, TextField, Button, Paper } from '@mui/material';
@@ -44,6 +44,7 @@ const Chat = () => {
   const [messages, setMessages] = useState([]);
   const [newMessage, setNewMessage] = useState('');
   const [error, setError] = useState('');
+  const dummy = useRef();
 
   const fetchChatData = useCallback(async () => {
     try {
@@ -58,7 +59,7 @@ const Chat = () => {
 
   useEffect(() => {
     fetchChatData();
-    const intervalId = setInterval(fetchChatData, 1000);
+    const intervalId = setInterval(fetchChatData, 100);
     return () => clearInterval(intervalId);
   }, [fetchChatData]);
 
@@ -71,6 +72,7 @@ const Chat = () => {
       });
       setMessages((prevMessages) => [...prevMessages, response.data]);
       setNewMessage('');
+      dummy.current.scrollIntoView({ behavior: 'smooth' });
       setError('');
     } catch (err) {
       console.error('Error sending message', err);
@@ -98,6 +100,7 @@ const Chat = () => {
             </MessageItem>
           ))}
         </List>
+        <div ref={dummy}></div>
       </MessagesContainer>
       <NewMessageForm onSubmit={handleSendMessage}>
         <TextField

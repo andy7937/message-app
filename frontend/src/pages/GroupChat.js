@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback } from 'react';
+import React, { useState, useEffect, useCallback, useRef } from 'react';
 import axios from 'axios';
 import { useParams } from 'react-router-dom';
 import { Container, Typography, List, ListItem, ListItemText, TextField, Button, Paper } from '@mui/material';
@@ -43,6 +43,7 @@ const GroupChat = () => {
   const [messages, setMessages] = useState([]);
   const [newMessage, setNewMessage] = useState('');
   const [error, setError] = useState('');
+  const dummy = useRef();
 
   const fetchGroupChatData = useCallback(async () => {
     try {
@@ -57,7 +58,7 @@ const GroupChat = () => {
 
   useEffect(() => {
     fetchGroupChatData();
-    const intervalId = setInterval(fetchGroupChatData, 1000);
+    const intervalId = setInterval(fetchGroupChatData, 100);
     return () => clearInterval(intervalId);
   }, [fetchGroupChatData]);
 
@@ -71,6 +72,7 @@ const GroupChat = () => {
       });
       setMessages((prevMessages) => [...prevMessages, response.data]);
       setNewMessage('');
+      dummy.current.scrollIntoView({ behavior: 'smooth' });
       setError('');
     } catch (err) {
       console.error('Error sending message', err);
@@ -98,6 +100,7 @@ const GroupChat = () => {
             </MessageItem>
           ))}
         </List>
+        <div ref={dummy}></div>
       </MessagesContainer>
       <NewMessageForm onSubmit={handleSendMessage}>
         <TextField

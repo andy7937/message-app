@@ -59,7 +59,7 @@ function Dashboard() {
     const intervalId = setInterval(() => {
       fetchUserData();
       fetchGroupChats(); // Periodic fetch for group chats
-    }, 1000); // 1000ms interval
+    }, 100); // 100ms interval
 
     return () => clearInterval(intervalId); // Cleanup on unmount
   }, []);

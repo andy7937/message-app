@@ -14,7 +14,7 @@ const FriendTab = ({ friends }) => {
 
   const handleDeleteClick = async (event, currentUsername, username) => {
     event.stopPropagation();
-    if (window.confirm('Are you sure you want to remove this friend?')) {
+    if (window.confirm('Are you sure you want to remove this friend? all chat history will be removed')) {
       axios.post('https://message-app-6e0fca8854dd.herokuapp.com/api/dashboard/removefriend', {
         usernameCur: currentUsername,
         usernameFri: username
