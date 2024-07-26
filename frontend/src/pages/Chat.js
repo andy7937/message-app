@@ -52,7 +52,6 @@ const Chat = () => {
       setMessages(response.data.messages);
       setError('');
 
-      dummy.current.scrollIntoView({ behavior: 'smooth' });
     } catch (err) {
       console.error('Error fetching chat data', err);
       setError('Failed to fetch messages');
@@ -64,6 +63,10 @@ const Chat = () => {
     const intervalId = setInterval(fetchChatData, 100);
     return () => clearInterval(intervalId);
   }, [fetchChatData]);
+
+  useEffect(() => {
+    dummy.current.scrollIntoView({ behavior: 'smooth' });
+  }, [messages]);
 
   const handleSendMessage = async (e) => {
     e.preventDefault();
