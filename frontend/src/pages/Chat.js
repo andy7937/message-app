@@ -51,6 +51,8 @@ const Chat = () => {
       const response = await axios.get(`https://message-app-6e0fca8854dd.herokuapp.com/api/chat/${currentUsername}/${friendUsername}`);
       setMessages(response.data.messages);
       setError('');
+
+      dummy.current.scrollIntoView({ behavior: 'smooth' });
     } catch (err) {
       console.error('Error fetching chat data', err);
       setError('Failed to fetch messages');
@@ -72,7 +74,6 @@ const Chat = () => {
       });
       setMessages((prevMessages) => [...prevMessages, response.data]);
       setNewMessage('');
-      dummy.current.scrollIntoView({ behavior: 'smooth' });
       setError('');
     } catch (err) {
       console.error('Error sending message', err);
