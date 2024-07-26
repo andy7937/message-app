@@ -64,10 +64,6 @@ const Chat = () => {
     return () => clearInterval(intervalId);
   }, [fetchChatData]);
 
-  useEffect(() => {
-    dummy.current.scrollIntoView({ behavior: 'smooth' });
-  }, [messages]);
-
   const handleSendMessage = async (e) => {
     e.preventDefault();
     try {
@@ -78,6 +74,10 @@ const Chat = () => {
       setMessages((prevMessages) => [...prevMessages, response.data]);
       setNewMessage('');
       setError('');
+
+      setTimeout(() => {
+        dummy.current.scrollIntoView({ behavior: 'smooth' });
+      }, 0);
     } catch (err) {
       console.error('Error sending message', err);
       setError('Failed to send message');
