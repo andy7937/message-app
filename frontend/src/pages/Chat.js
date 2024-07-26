@@ -44,20 +44,27 @@ const Chat = () => {
   const [messages, setMessages] = useState([]);
   const [newMessage, setNewMessage] = useState('');
   const [error, setError] = useState('');
+  const [isInitialLoad, setIsInitialLoad] = useState(true); // State to track initial load
+
   const dummy = useRef();
 
-  dummy.current.scrollIntoView({ behavior: 'smooth' });
   const fetchChatData = useCallback(async () => {
     try {
       const response = await axios.get(`https://message-app-6e0fca8854dd.herokuapp.com/api/chat/${currentUsername}/${friendUsername}`);
       setMessages(response.data.messages);
       setError('');
 
+      
+      if (isInitialLoad) {
+        dummy.current.scrollIntoView({ behavior: 'smooth' });
+        setIsInitialLoad(false); // Set to false after the initial scroll
+      }
+
     } catch (err) {
       console.error('Error fetching chat data', err);
       setError('Failed to fetch messages');
     }
-  }, [currentUsername, friendUsername]);
+  }, [currentUsername, friendUsername, isInitialLoad]);
 
   useEffect(() => {
     fetchChatData();

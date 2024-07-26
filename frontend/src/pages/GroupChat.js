@@ -43,20 +43,25 @@ const GroupChat = () => {
   const [messages, setMessages] = useState([]);
   const [newMessage, setNewMessage] = useState('');
   const [error, setError] = useState('');
-  const dummy = useRef();
+  const [isInitialLoad, setIsInitialLoad] = useState(true); // State to track initial load
 
-  dummy.current.scrollIntoView({ behavior: 'smooth' });
+  const dummy = useRef();
 
   const fetchGroupChatData = useCallback(async () => {
     try {
       const response = await axios.get(`https://message-app-6e0fca8854dd.herokuapp.com/api/groupchat/${groupChatName}/open`);
       setMessages(response.data.messages);
       setError('');
+
+      if (isInitialLoad) {
+        dummy.current.scrollIntoView({ behavior: 'smooth' });
+        setIsInitialLoad(false); // Set to false after the initial scroll
+      }
     } catch (err) {
       console.error('Error fetching chat data', err);
       setError('Failed to fetch messages');
     }
-  }, [groupChatName]);
+  }, [groupChatName, isInitialLoad]);
 
   useEffect(() => {
     fetchGroupChatData();
