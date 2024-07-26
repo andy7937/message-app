@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useCallback, useRef } from 'react';
 import axios from 'axios';
 import { useParams } from 'react-router-dom';
-import { Container, Typography, List, ListItem, ListItemText, TextField, Button, Paper } from '@mui/material';
+import { Container, Typography, List, ListItem, TextField, Button, Paper } from '@mui/material';
 import { styled } from '@mui/system';
 
 const ChatContainer = styled(Container)({
