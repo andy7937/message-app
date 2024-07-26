@@ -29,12 +29,12 @@ const MessageItem = styled(ListItem)(({ isCurrentUser }) => ({
 }));
 
 const MessageBubble = styled('div')(({ isCurrentUser }) => ({
-  backgroundColor: isCurrentUser ? '#0084ff' : '#f5f5f5', // Blue for current user's messages
-  color: isCurrentUser ? '#fff' : '#000', // White text for current user's messages
+  backgroundColor: isCurrentUser ? '#0084ff' : '#f5f5f5', 
+  color: isCurrentUser ? '#fff' : '#000', 
   borderRadius: '10px',
   padding: '10px',
-  maxWidth: '70%', // Limit width of message bubbles
-  wordWrap: 'break-word', // Allow long words to break onto the next line
+  maxWidth: '70%', 
+  wordWrap: 'break-word', 
 }));
 
 const NewMessageForm = styled('form')({

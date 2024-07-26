@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useCallback, useRef } from 'react';
 import axios from 'axios';
 import { useParams } from 'react-router-dom';
-import { Container, Typography, List, ListItem, ListItemText, TextField, Button, Paper } from '@mui/material';
+import { Container, Typography, List, ListItem, TextField, Button, Paper } from '@mui/material';
 import { styled } from '@mui/system';
 
 const ChatContainer = styled(Container)({
@@ -22,15 +22,20 @@ const MessagesContainer = styled(Paper)({
   marginBottom: '20px',
 });
 
-const MessageItem = styled(ListItem)({
+const MessageItem = styled(ListItem)(({ isCurrentUser }) => ({
   display: 'flex',
-  flexDirection: 'column',
-  alignItems: 'flex-start',
+  justifyContent: isCurrentUser ? 'flex-end' : 'flex-start',
   marginBottom: '10px',
-  backgroundColor: '#f5f5f5',
+}));
+
+const MessageBubble = styled('div')(({ isCurrentUser }) => ({
+  backgroundColor: isCurrentUser ? '#0084ff' : '#f5f5f5', 
+  color: isCurrentUser ? '#fff' : '#000', 
   borderRadius: '10px',
   padding: '10px',
-});
+  maxWidth: '70%',
+  wordWrap: 'break-word', 
+}));
 
 const NewMessageForm = styled('form')({
   display: 'flex',
@@ -43,8 +48,7 @@ const GroupChat = () => {
   const [messages, setMessages] = useState([]);
   const [newMessage, setNewMessage] = useState('');
   const [error, setError] = useState('');
-  const [isInitialLoad, setIsInitialLoad] = useState(true); // State to track initial load
-
+  const [isInitialLoad, setIsInitialLoad] = useState(true);
   const dummy = useRef();
 
   const fetchGroupChatData = useCallback(async () => {
@@ -55,7 +59,7 @@ const GroupChat = () => {
 
       if (isInitialLoad) {
         dummy.current.scrollIntoView({ behavior: 'smooth' });
-        setIsInitialLoad(false); // Set to false after the initial scroll
+        setIsInitialLoad(false);
       }
     } catch (err) {
       console.error('Error fetching chat data', err);
@@ -96,19 +100,18 @@ const GroupChat = () => {
       {error && <Typography color="error">{error}</Typography>}
       <MessagesContainer>
         <List>
-          {messages.map((msg, index) => (
-            <MessageItem key={index}>
-              <ListItemText
-                primary={<strong>{msg.sender}</strong>}
-                secondary={
-                  <>
-                    <Typography>{msg.message}</Typography>
-                    <Typography variant="caption">{new Date(msg.timestamp).toLocaleString()}</Typography>
-                  </>
-                }
-              />
-            </MessageItem>
-          ))}
+          {messages.map((msg, index) => {
+            const isCurrentUser = msg.sender === currentUsername; 
+            return (
+              <MessageItem key={index} isCurrentUser={isCurrentUser}>
+                <MessageBubble isCurrentUser={isCurrentUser}>
+                  <strong>{msg.sender}</strong>
+                  <Typography>{msg.message}</Typography>
+                  <Typography variant="caption">{new Date(msg.timestamp).toLocaleString()}</Typography>
+                </MessageBubble>
+              </MessageItem>
+            );
+          })}
         </List>
         <div ref={dummy}></div>
       </MessagesContainer>
