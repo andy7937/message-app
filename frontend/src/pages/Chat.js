@@ -69,7 +69,7 @@ const Chat = () => {
 
   useEffect(() => {
     fetchChatData();
-    const intervalId = setInterval(fetchChatData, 100);
+    const intervalId = setInterval(fetchChatData, 500);
     return () => clearInterval(intervalId);
   }, [fetchChatData]);
 

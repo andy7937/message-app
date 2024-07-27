@@ -47,11 +47,10 @@ Specific chat
 retrieve all chats with the person  
 
 # Further features after core functionalities are implemented
-Voice chat  
-image sending  
+Voice chat (using webRTC)
+image sending/profile picture (will need to implement image storage using cloud storage such as cloudinary)
 email verification when registering  
 encryption of messages
-unfriending
 
 
 # End to End/full-stack workflow

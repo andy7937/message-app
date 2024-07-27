@@ -69,7 +69,7 @@ const GroupChat = () => {
 
   useEffect(() => {
     fetchGroupChatData();
-    const intervalId = setInterval(fetchGroupChatData, 100);
+    const intervalId = setInterval(fetchGroupChatData, 500);
     return () => clearInterval(intervalId);
   }, [fetchGroupChatData]);
 
