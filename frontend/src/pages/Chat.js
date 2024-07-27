@@ -58,7 +58,9 @@ const Chat = () => {
       setError('');
 
       if (isInitialLoad) {
-        dummy.current.scrollIntoView({ behavior: 'smooth' });
+        setTimeout(() => {
+          dummy.current.scrollIntoView({ behavior: 'smooth' });
+        }, 0);
         setIsInitialLoad(false);
       }
     } catch (err) {
